@@ -48,6 +48,30 @@ const App = () => {
   // 🟤 useCallback — Memoize functions
   const showAlert = useCallback(() => alert("Hello!"), []);
 
+  const Timer = () => {
+    const [seconds, setSeconds] = useState(0);
+
+    useEffect(() => {
+      // 🟢 Start an interval that updates state every second
+      const intervalId = setInterval(() => {
+        setSeconds((prev) => prev + 1);
+        console.log("⏳ Timer running...");
+      }, 1000);
+
+      // 🔴 Cleanup function (stops interval on unmount)
+      return () => {
+        clearInterval(intervalId);
+        console.log("🛑 Cleanup: Timer stopped!");
+      };
+    }, []); // Runs only on mount/unmount
+
+    return (
+      <div>
+        <h2>⏱ Timer: {seconds} sec</h2>
+      </div>
+    );
+  };
+
   return (
     <MyContext.Provider value="Hello from Context!">
       <div style={{ padding: "20px" }}>
@@ -79,6 +103,7 @@ const App = () => {
 
         <h2>useCallback</h2>
         <button onClick={showAlert}>Show Alert</button>
+        <Timer />
       </div>
     </MyContext.Provider>
   );

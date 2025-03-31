@@ -5,7 +5,6 @@ import "./index.css";
 // import { store } from "./Redux/store.js";
 import App from "./App.jsx";
 
-console.log(document.getElementById("root"), "sss");
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <App />

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Truthy & Falsy Values in JavaScript</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        text-align: center;
+        padding: 20px;
+      }
+      .container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 700px;
+        margin: auto;
+        text-align: left;
+      }
+      h1,
+      h2 {
+        color: #333;
+        text-align: center;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+      }
+      th {
+        background: #333;
+        color: white;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      li {
+        background: #e3e3e3;
+        padding: 8px;
+        margin: 5px 0;
+        border-radius: 5px;
+      }
+      pre {
+        background: #333;
+        color: #fff;
+        padding: 15px;
+        border-radius: 5px;
+        white-space: pre-wrap;
+        overflow-x: auto;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Truthy & Falsy Values in JavaScript</h1>
+
+      <h2>Falsy Values (Only 7)</h2>
+      <table>
+        <tr>
+          <th>Falsy Value</th>
+          <th>Example</th>
+        </tr>
+        <tr>
+          <td>false</td>
+          <td>if (false) {}</td>
+        </tr>
+        <tr>
+          <td>0</td>
+          <td>if (0) {}</td>
+        </tr>
+        <tr>
+          <td>-0</td>
+          <td>if (-0) {}</td>
+        </tr>
+        <tr>
+          <td>"" (empty string)</td>
+          <td>if ("") {}</td>
+        </tr>
+        <tr>
+          <td>null</td>
+          <td>if (null) {}</td>
+        </tr>
+        <tr>
+          <td>undefined</td>
+          <td>if (undefined) {}</td>
+        </tr>
+        <tr>
+          <td>NaN</td>
+          <td>if (NaN) {}</td>
+        </tr>
+      </table>
+
+      <h2>Truthy Values (Everything Else)</h2>
+      <ul>
+        <li>Any non-zero number (e.g., 1, -1, 3.14, Infinity, -Infinity)</li>
+        <li>Any non-empty string (e.g., "hello", " ", "0")</li>
+        <li>Any object (e.g., {}, { key: "value" })</li>
+        <li>Any array (e.g., [], [1, 2, 3])</li>
+        <li>Any function (e.g., function() {})</li>
+      </ul>
+
+      <h2>Examples</h2>
+      <pre>
+if ("hello") console.log("Truthy!");  // ✅ Runs
+if (" ") console.log("Truthy!");      // ✅ Runs (even a space is truthy)
+if ("0") console.log("Truthy!");      // ✅ Runs (string "0" is truthy)
+if ([]) console.log("Truthy!");       // ✅ Runs (empty array is truthy)
+if ({}) console.log("Truthy!");       // ✅ Runs (empty object is truthy)
+if (1) console.log("Truthy!");        // ✅ Runs
+if (-1) console.log("Truthy!");       // ✅ Runs
+if (Infinity) console.log("Truthy!"); // ✅ Runs
+if (function() {}) console.log("Truthy!");  // ✅ Runs (function is truthy)
+if (null) console.log("Falsy!");      // ❌ Doesn't run
+if (0) console.log("Falsy!");        // ❌ Doesn't run
+if (-0) console.log("Falsy!");       // ❌ Doesn't run
+if ("") console.log("Falsy!");       // ❌ Doesn't run (empty string is falsy)
+if (NaN) console.log("Falsy!");      // ❌ Doesn't run
+if (undefined) console.log("Falsy!"); // ❌ Doesn't run
+        </pre
+      >
+    </div>
+  </body>
+</html>

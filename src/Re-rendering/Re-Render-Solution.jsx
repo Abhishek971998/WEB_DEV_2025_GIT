@@ -196,6 +196,8 @@ const OptimizedEffectComponent = () => {
   const [count, setCount] = useState(0);
   const [data, setData] = useState([]);
 
+  console.log(data, "data");
+
   // Use useCallback to memoize the function
   const fetchData = useCallback(() => {
     console.log("Fetching data...");
@@ -261,17 +263,17 @@ const App = () => {
   return (
     <div>
       <h1>React Re-rendering Solutions</h1>
-      <ParentWithPropSolution />
+      {/* <ParentWithPropSolution />
       <hr />
       <ParentWithComponentComposition />
       <hr />
       <OptimizedContextExample />
       <hr />
-      <OptimizedCalculationComponent />
+      <OptimizedCalculationComponent /> */}
       <hr />
       <OptimizedEffectComponent />
       <hr />
-      <LazyLoadingExample />
+      {/* <LazyLoadingExample /> */}
     </div>
   );
 };

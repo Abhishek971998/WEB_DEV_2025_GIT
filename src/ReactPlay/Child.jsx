@@ -12,3 +12,4 @@ const ChildCounter = ({ count, onIncrement }) => {
 };
 
 export default memo(ChildCounter);
+// export default ChildCounter;

@@ -17,7 +17,7 @@ const ParentWithStateUpdates = () => {
         Update unrelated state: {unrelatedState}
       </button>
 
-      {/* ChildCounter rerenders even when only unrelatedState changes */}
+      {/* ChildCounter rerenders even when only unrelatedState changes if MEMOOOOOOOO is not used */}
       <ChildCounter count={count} onIncrement={onIncrement} />
     </div>
   );

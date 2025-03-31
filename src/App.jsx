@@ -14,6 +14,9 @@ import ReRenderSolution from "./Re-rendering/Re-Render-Solution";
 import DebounceNew from "./Debouce/index";
 import ThrottleExample from "./Throtling";
 import Playground from "./Playground";
+import Debouncing from "./Debouce";
+import TodoApp from "./Todo";
+import StringProblems from "./StringInterviewProblem";
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -37,8 +40,10 @@ function App() {
       {/* <ReRenderSolution /> */}
       {/* <DebounceNew /> */}
       {/* <ThrottleExample /> */}
-      <Playground />
+      {/* <Playground /> */}
       {/* <h2>hewnwenklw elw evwelvwvb</h2> */}
+      {/* <TodoApp /> */}
+      <StringProblems />
     </>
   );
 }

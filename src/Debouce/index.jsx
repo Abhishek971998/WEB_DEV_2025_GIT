@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useRef } from "react";
 
-function Debouncing() {
+function Debouncing_() {
   const debounceTimeout = useRef(null);
 
   function debounce__(func, delay) {
@@ -34,20 +34,20 @@ function Debouncing() {
   return <input onChange={de} />;
 }
 
-function index() {
+function Debouncing() {
   function debounce(fn, delay) {
     let timeout;
     return function (...args) {
       clearTimeout(timeout);
-      timeout = setTimeout(() => fn(...args), delay);
+      timeout = setTimeout(() => {
+        fn(...args);
+      }, delay);
     };
   }
+  const debouncedSearch = debounce((e) => {
+    console.log(e);
+  }, 1000);
 
-  // Usage example
-  const debouncedSearch = debounce(
-    (term) => console.log(`Searching: ${term}`),
-    300
-  );
   return (
     <div>
       <h2>DEBOUNCE</h2>
@@ -58,5 +58,5 @@ function index() {
     </div>
   );
 }
+// export default Debouncing;
 export default Debouncing;
-// export default index;

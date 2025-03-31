@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Event Loop</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f4f4f4;
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+      .section {
+        background: white;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 5px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .sync {
+        border-left: 5px solid #007bff;
+      }
+      .microtask {
+        border-left: 5px solid #28a745;
+      }
+      .macrotask {
+        border-left: 5px solid #dc3545;
+      }
+      .code {
+        font-family: monospace;
+        background: #eee;
+        padding: 5px;
+        border-radius: 3px;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>JavaScript Event Loop</h1>
+
+    <div class="section sync">
+      <h2>1️⃣ Synchronous Code (Call Stack - Highest Priority)</h2>
+      <p>Executed first in the **Call Stack**.</p>
+      <p>Example: <span class="code">console.log("Synchronous Task")</span></p>
+    </div>
+
+    <div class="section microtask">
+      <h2>2️⃣ Microtask Queue (High Priority)</h2>
+      <p>Executes **after synchronous code but before macrotasks**.</p>
+      <p>
+        Includes <span class="code">Promise.then()</span> and
+        <span class="code">MutationObserver</span>.
+      </p>
+    </div>
+
+    <div class="section macrotask">
+      <h2>3️⃣ Macrotask Queue (Lower Priority)</h2>
+      <p>Executes **after Microtasks**.</p>
+      <p>
+        Includes <span class="code">setTimeout</span>,
+        <span class="code">setInterval</span>, I/O tasks.
+      </p>
+    </div>
+
+    <h2>🛠 Event Loop in Action</h2>
+    <button onclick="runEventLoopExample()">Run Example</button>
+
+    <div class="section">
+      <h3>📌 Check the Console for Output</h3>
+      <p>Open Developer Tools (F12) → Console</p>
+    </div>
+
+    <script>
+      function runEventLoopExample() {
+        console.log("1️⃣ Synchronous Code");
+        console.log("1️⃣ Synchronous Code");
+        console.log("1️⃣ Synchronous Code");
+
+        setTimeout(() => console.log("3️⃣ Macrotask - setTimeout"), 0);
+
+        Promise.resolve().then(() => console.log("2️⃣ Microtask - Promise"));
+
+        // Simulating a fetch that resolves immediately
+        Promise.resolve().then(() =>
+          console.log("2️⃣ Microtask - Fetch.then()")
+        );
+
+        console.log("1️⃣ More Synchronous Code");
+
+        console.log("1️⃣ More Synchronous Code");
+      }
+    </script>
+  </body>
+</html>

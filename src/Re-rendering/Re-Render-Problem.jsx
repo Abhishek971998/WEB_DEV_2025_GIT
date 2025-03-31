@@ -11,7 +11,7 @@ const ParentWithPropProblem = () => {
   const userInfo = { name: "John", id: 123 };
 
   const userInfo__ = useMemo(() => {
-    return { name: "sdcdc" };
+    return { name: "Jhone" };
   }, []);
 
   // This creates a new function on EVERY render
@@ -39,6 +39,11 @@ const ParentWithPropProblem = () => {
 // This will rerender whenever ParentWithPropProblem rerenders
 const ChildComponent = ({ userInfo, onButtonClick }) => {
   console.log("ChildComponent rendered");
+
+  useEffect(() => {
+    console.log("userInfo prop changed:", userInfo);
+  }, [userInfo]); // Logs when userInfo changes
+
   return (
     <div>
       <p>User: {userInfo.name}</p>
@@ -69,7 +74,7 @@ const ParentWithStateUpdates = () => {
   );
 };
 
-const ChildCounter = ({ count, onIncrement }) => {
+const ChildCounter = React.memo(({ count, onIncrement }) => {
   console.log("ChildCounter rendered");
   return (
     <div>
@@ -77,7 +82,7 @@ const ChildCounter = ({ count, onIncrement }) => {
       <button onClick={onIncrement}>Increment</button>
     </div>
   );
-};
+});
 
 // ======================================================
 // EXAMPLE 3: Context Causing Widespread Rerenders
@@ -170,6 +175,11 @@ const EffectLoopComponent = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    console.log("Fetching data...");
+    setData((prevData) => [...prevData, count]); // Using functional update to get fresh state
+  }, [count]); // Dependency on count
+
   // This function is recreated on every render
   const fetchData = () => {
     console.log("Fetching data...");
@@ -194,13 +204,13 @@ const App = () => {
   return (
     <div>
       <h1>React Re-rendering Problems</h1>
-      <ParentWithPropProblem />
+      {/* <ParentWithPropProblem /> */}
       <hr />
-      <ParentWithStateUpdates />
+      {/* <ParentWithStateUpdates /> */}
       <hr />
-      <ContextExample />
+      {/* <ContextExample /> */}
       <hr />
-      <ExpensiveCalculationComponent />
+      {/* <ExpensiveCalculationComponent /> */}
       <hr />
       <EffectLoopComponent />
     </div>
