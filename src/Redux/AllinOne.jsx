@@ -2,6 +2,31 @@ import React from "react";
 import { createStore } from "redux";
 import { Provider, useSelector, useDispatch } from "react-redux";
 
+// Redux & Redux-Saga Overview
+// 🔹 Redux - State Management Library
+
+// Redux is a predictable state container for JavaScript applications.
+// It helps manage application state in a centralized store, making
+// data flow predictable and easier to debug.
+
+// Key Concepts of Redux
+
+// Store → A single source of truth for the entire application's state.
+
+// Actions → Plain JavaScript objects that describe what happened (e.g., "INCREMENT").
+
+// Reducers → Pure functions that determine how the state should change based on actions.
+
+// Dispatch → A function used to send actions to the Redux store.
+
+// Selectors → Functions to retrieve specific parts of the state from the store.
+
+// Advantages of Redux
+// ✅ Centralized state management
+// ✅ Predictable state updates
+// ✅ Easy debugging using Redux DevTools
+// ✅ Improves maintainability in large applications
+
 // 1. Initial State
 const initialState = { count: 0 };
 

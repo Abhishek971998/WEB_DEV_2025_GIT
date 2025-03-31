@@ -19,30 +19,7 @@ function ThrottleButtonExample() {
   const handleClick = throttle(() => {
     console.log("Button clicked! 🚀");
     // alert("Button clicked! 🚀");
-  }, 2000);
-
-  const mock = (success, timeout = 1000) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (success) {
-          resolve({ status: 200, data: {} });
-        } else {
-          reject({ message: "Error" });
-        }
-      }, timeout);
-    });
-  };
-  const someEvent = async () => {
-    try {
-      let d = await mock(true, 1000);
-      return d;
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
-
-  let d = someEvent();
-  console.log(d, "someEvent");
+  }, 1000);
 
   return (
     <div>

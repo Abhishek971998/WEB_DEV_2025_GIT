@@ -1,5 +1,9 @@
 import React, { createContext, useContext, useState } from "react";
 
+// The React Context API is a built-in feature that allows you to share data (state)
+// across components without passing props manually at every level.
+// It helps manage global state like theme, authentication, user settings, and more
+
 // 1. Create the context
 const MyContext = createContext();
 
