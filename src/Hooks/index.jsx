@@ -16,13 +16,6 @@ const App = () => {
   const [count, setCount] = useState(0);
   const [name, setName] = useState("John");
 
-  // 🟡 useEffect — Run code on mount & update
-  useEffect(() => {
-    console.log("Component rendered or count changed!");
-
-    return () => console.log("Cleanup on unmount"); // Cleanup function
-  }, [count]); // Only run when count changes
-
   // 🔵 useContext — Use global state
   const MyComponent = () => {
     const value = useContext(MyContext);
@@ -55,13 +48,13 @@ const App = () => {
       // 🟢 Start an interval that updates state every second
       const intervalId = setInterval(() => {
         setSeconds((prev) => prev + 1);
-        console.log("⏳ Timer running...");
+        // console.log("⏳ Timer running...");
       }, 1000);
 
       // 🔴 Cleanup function (stops interval on unmount)
       return () => {
         clearInterval(intervalId);
-        console.log("🛑 Cleanup: Timer stopped!");
+        // console.log("🛑 Cleanup: Timer stopped!");
       };
     }, []); // Runs only on mount/unmount
 

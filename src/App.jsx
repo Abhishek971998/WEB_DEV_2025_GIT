@@ -11,6 +11,7 @@ import ThrottleExample from "./Throtling";
 import Playground from "./Playground";
 import Debouncing from "./Debouce";
 import TodoApp from "./Todo";
+import FrontendFAQ from "./OptimizeQuestions";
 
 function App() {
   return (
@@ -64,6 +65,9 @@ function App() {
             <li>
               <Link to="/todo">Todo App</Link>
             </li>
+            <li>
+              <Link to="/FEFAQ">FrontendFAQ</Link>
+            </li>
           </ul>
         </nav>
 
@@ -80,6 +84,7 @@ function App() {
           <Route path="/playground" element={<Playground />} />
           <Route path="/debouncing" element={<Debouncing />} />
           <Route path="/todo" element={<TodoApp />} />
+          <Route path="/FEFAQ" element={<FrontendFAQ />} />
         </Routes>
       </div>
     </Router>
