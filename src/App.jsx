@@ -12,11 +12,16 @@ import Playground from "./Playground";
 import Debouncing from "./Debouce";
 import TodoApp from "./Todo";
 import FrontendFAQ from "./OptimizeQuestions";
+import ThisKeyword from "./This";
+import CodeBlock from "./CodeBlocks";
+import { Navigation } from "./components/Navigation";
 
 function App() {
   return (
     <Router>
       <div>
+        <Navigation />
+
         <nav>
           <ul
             style={{
@@ -68,6 +73,12 @@ function App() {
             <li>
               <Link to="/FEFAQ">FrontendFAQ</Link>
             </li>
+            <li>
+              <Link to="/ThisKeyword">ThisKeyword</Link>
+            </li>
+            <li>
+              <Link to="/CodeBlock">CodeBlock</Link>
+            </li>
           </ul>
         </nav>
 
@@ -85,6 +96,16 @@ function App() {
           <Route path="/debouncing" element={<Debouncing />} />
           <Route path="/todo" element={<TodoApp />} />
           <Route path="/FEFAQ" element={<FrontendFAQ />} />
+          <Route path="/ThisKeyword" element={<ThisKeyword />} />
+
+          <Route path="/react" element={<CodeBlock />} />
+          <Route path="/javascript" element={<CodeBlock />} />
+
+          {/* <Route
+            path="/javascript"
+            element={<TopicList category="javascript" />}
+          />
+          <Route path="/react" element={<TopicList category="react" />} /> */}
         </Routes>
       </div>
     </Router>

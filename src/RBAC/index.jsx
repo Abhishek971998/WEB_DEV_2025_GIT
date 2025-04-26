@@ -4,32 +4,25 @@ const roles = {
   viewer: ["read"],
 };
 
-const checkPermission = (role, action) => {
-  return roles[role]?.includes(action);
-};
-
-//ProtectedComponent put it in different
-const ProtectedComponent = ({ role, action, children }) => {
-  return checkPermission(role, action) ? children : <p>Access Denied</p>;
-};
+const hasAccess = (role, action) => roles[role]?.includes(action);
 
 const App = () => {
-  const userRole = "editor"; // Change this to "admin" or "viewer" for testing
+  const userRole = "editor"; // try "admin" or "viewer"
 
   return (
     <div>
       <h1>Welcome, {userRole}!</h1>
 
-      <ProtectedComponent role={userRole} action="read">
-        <p>This is a protected content visible to your role.</p>
-      </ProtectedComponent>
+      {hasAccess(userRole, "read") && <p>You can read this content.</p>}
 
-      <ProtectedComponent role={userRole} action="delete">
-        <p>Delete Button (only for admins)</p>
-      </ProtectedComponent>
+      {hasAccess(userRole, "delete") && <button>Delete</button>}
+
+      {!hasAccess(userRole, "delete") && <p>Delete access denied</p>}
     </div>
   );
 };
+
+export default App;
 
 // 🔹 Advantages of RBAC
 // ✅ Security – Limits access to only necessary functionalities.
