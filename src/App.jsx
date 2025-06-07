@@ -15,7 +15,7 @@ import FrontendFAQ from "./OptimizeQuestions";
 import ThisKeyword from "./This";
 import CodeBlock from "./CodeBlocks";
 import { Navigation } from "./components/Navigation";
-import EventLoop from "./EventLoop";
+import EventLoopFlashcard from "./EventLoop";
 import MostAskedTheory from "./MostAskedTheory";
 
 const routes = [
@@ -50,7 +50,7 @@ const routes = [
   { path: "/FEFAQ", element: <FrontendFAQ />, label: "FrontendFAQ" },
   { path: "/ThisKeyword", element: <ThisKeyword />, label: "ThisKeyword" },
   { path: "/CodeBlock", element: <CodeBlock />, label: "CodeBlock" },
-  { path: "/EventLopp", element: <EventLoop />, label: "EventLopp" },
+  { path: "/eventLoop", element: <EventLoopFlashcard />, label: "EventLoop" },
   {
     path: "/MostAskedTheory",
     element: <MostAskedTheory />,
