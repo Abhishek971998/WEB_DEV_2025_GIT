@@ -16,7 +16,7 @@ export const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Book className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
-            <span className="ml-2 text-xl font-bold">React Cheatsheet</span>
+            <span className="ml-2 text-xl font-bold">Home</span>
           </div>
 
           <div className="flex-1 max-w-xl mx-4">

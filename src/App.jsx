@@ -56,6 +56,11 @@ const routes = [
     element: <MostAskedTheory />,
     label: "MostAskedTheory",
   },
+  {
+    path: "/",
+    element: <MostAskedTheory />,
+    label: "MostAskedTheory",
+  },
   { path: "/react", element: <CodeBlock />, label: "React" },
   { path: "/javascript", element: <CodeBlock />, label: "JavaScript" },
 ];

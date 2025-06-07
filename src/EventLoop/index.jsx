@@ -46,7 +46,7 @@ const EventLoopFlashcard = () => {
               <div className="p-6 space-y-6">
                 <section
                   className="bg-sky-50 rounded-xl p-5 border border-sky-100"
-                  style={{ height: "250px" }}
+                  style={{ height: "25%" }}
                 >
                   <h2 className="text-xl font-semibold text-sky-700 mb-3">
                     Basic Answer
@@ -116,7 +116,7 @@ const EventLoopFlashcard = () => {
 
                 <section
                   className="bg-sky-50 rounded-xl p-5 border border-sky-100"
-                  style={{ height: "150px" }}
+                  style={{ height: "15%" }}
                 >
                   <h2 className="text-xl font-semibold text-sky-700 mb-3">
                     One-Liner Summary
@@ -129,7 +129,7 @@ const EventLoopFlashcard = () => {
 
                 <section
                   className="bg-sky-50 rounded-xl p-5 border border-sky-100"
-                  style={{ height: "400px", overflow: "scroll" }}
+                  style={{ height: "40%", overflow: "scroll" }}
                 >
                   <h2 className="text-xl font-semibold text-sky-700 mb-3">
                     Simple Example
@@ -163,7 +163,7 @@ console.log('C');
               <div className="p-6 space-y-6">
                 <section
                   className="bg-purple-50 rounded-xl p-5 border border-purple-100"
-                  style={{ height: "250px" }}
+                  style={{ height: "25%" }}
                 >
                   <h2 className="text-xl font-semibold text-purple-700 mb-3">
                     Basic Answer
@@ -213,7 +213,7 @@ console.log('C');
 
                 <section
                   className="bg-purple-50 rounded-xl p-5 border border-purple-100"
-                  style={{ height: "150px" }}
+                  style={{ height: "15%" }}
                 >
                   <h2 className="text-xl font-semibold text-purple-700 mb-3">
                     One-Liner Summary
@@ -227,7 +227,7 @@ console.log('C');
 
                 <section
                   className="bg-purple-50 rounded-xl p-5 border border-purple-100"
-                  style={{ height: "400px", overflow: "scroll" }}
+                  style={{ height: "40%", overflow: "scroll" }}
                 >
                   <h2 className="text-xl font-semibold text-purple-700 mb-3">
                     Simple Example
@@ -273,7 +273,7 @@ console.log(counter()); // 3`}
               <div className="p-6 space-y-6">
                 <section
                   className="bg-emerald-50 rounded-xl p-5 border border-emerald-100"
-                  style={{ height: "250px" }}
+                  style={{ height: "25%" }}
                 >
                   <h2 className="text-xl font-semibold text-emerald-700 mb-3">
                     Basic Answer
@@ -325,7 +325,7 @@ console.log(counter()); // 3`}
 
                 <section
                   className="bg-emerald-50 rounded-xl p-5 border border-emerald-100"
-                  style={{ height: "150px" }}
+                  style={{ height: "15%" }}
                 >
                   <h2 className="text-xl font-semibold text-emerald-700 mb-3">
                     One-Liner Summary
@@ -339,7 +339,7 @@ console.log(counter()); // 3`}
 
                 <section
                   className="bg-emerald-50 rounded-xl p-5 border border-emerald-100"
-                  style={{ height: "400px", overflow: "scroll" }}
+                  style={{ height: "40%", overflow: "scroll" }}
                 >
                   <h2 className="text-xl font-semibold text-emerald-700 mb-3">
                     Simple Example
@@ -384,7 +384,7 @@ async function getData() {
               <div className="p-6 space-y-6">
                 <section
                   className="bg-amber-50 rounded-xl p-5 border border-amber-100"
-                  style={{ height: "250px" }}
+                  style={{ height: "25%" }}
                 >
                   <h2 className="text-xl font-semibold text-amber-700 mb-3">
                     Basic Answer
@@ -437,7 +437,7 @@ async function getData() {
 
                 <section
                   className="bg-amber-50 rounded-xl p-5 border border-amber-100 "
-                  style={{ height: "150px" }}
+                  style={{ height: "15%" }}
                 >
                   <h2 className="text-xl font-semibold text-amber-700 mb-3">
                     One-Liner Summary
@@ -451,7 +451,7 @@ async function getData() {
 
                 <section
                   className="bg-amber-50 rounded-xl p-5 border border-amber-100"
-                  style={{ height: "400px", overflow: "scroll" }}
+                  style={{ height: "40%", overflow: "scroll" }}
                 >
                   <h2 className="text-xl font-semibold text-amber-700 mb-3">
                     Simple Example

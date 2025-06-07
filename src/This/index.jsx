@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./index.css";
 
 /*
 THEORY: 'this' Keyword in JavaScript
@@ -107,6 +108,11 @@ function App() {
     <div className="container">
       <h1>Understanding 'this' keyword</h1>
 
+      <div className="output-section">
+        <h2>Output:</h2>
+        <pre>{output}</pre>
+      </div>
+
       <div className="example-section">
         <h2>1. Regular Function vs Arrow Function</h2>
         <button onClick={() => setOutput(regularFunction())}>
@@ -154,109 +160,83 @@ function App() {
         </button>
       </div>
 
-      <div className="output-section">
-        <h2>Output:</h2>
-        <pre>{output}</pre>
-      </div>
-
       <div className="theory-section">
-        <h2>Common Interview Questions:</h2>
+        <h2>Common Interview Questions</h2>
         <ol>
           <li>
-            Q: What is the difference between regular functions and arrow
-            functions regarding 'this'?
-            <br />
-            A: Regular functions have their own 'this' binding based on how
-            they're called, while arrow functions inherit 'this' from their
-            enclosing scope.
+            <strong>
+              Q: What is the difference between regular functions and arrow
+              functions regarding 'this'?
+            </strong>
+            <p>
+              A: Regular functions have their own 'this' binding based on how
+              they're called, while arrow functions inherit 'this' from their
+              enclosing scope.
+            </p>
           </li>
           <li>
-            Q: How does 'this' behave in event handlers?
-            <br />
-            A: In regular function event handlers, 'this' refers to the DOM
-            element that triggered the event. In arrow functions, it inherits
-            from the surrounding scope.
+            <strong>Q: How does 'this' behave in event handlers?</strong>
+            <p>
+              A: In regular function event handlers, 'this' refers to the DOM
+              element that triggered the event. In arrow functions, it inherits
+              from the surrounding scope.
+            </p>
           </li>
           <li>
-            Q: What's the difference between call(), apply(), and bind()?
-            <br />
-            A: call() and apply() immediately invoke the function with a
-            specified 'this' value (apply() takes arguments as an array), while
-            bind() creates a new function with a fixed 'this' value.
+            <strong>
+              Q: What's the difference between call(), apply(), and bind()?
+            </strong>
+            <p>
+              A: call() and apply() immediately invoke the function with a
+              specified 'this' value (apply() takes arguments as an array),
+              while bind() creates a new function with a fixed 'this' value.
+            </p>
           </li>
           <li>
-            Q: Why doesn't 'this' work in arrow functions as object methods?
-            <br />
-            A: Arrow functions don't have their own 'this' binding; they inherit
-            it from the enclosing scope, which is often not what you want for
-            object methods.
+            <strong>
+              Q: Why doesn't 'this' work in arrow functions as object methods?
+            </strong>
+            <p>
+              A: Arrow functions don't have their own 'this' binding; they
+              inherit it from the enclosing scope, which is often not what you
+              want for object methods.
+            </p>
           </li>
-
           <li>
-            Q: What is the Event Loop and how does it work?
-            <br />
-            A: The Event Loop is JavaScript's mechanism for handling
-            asynchronous operations. It continuously checks the Call Stack and
-            queues (Microtask and Callback), moving tasks to the Call Stack when
-            it's empty.
+            <strong>Q: What is the Event Loop and how does it work?</strong>
+            <p>
+              A: The Event Loop is JavaScript's mechanism for handling
+              asynchronous operations. It continuously checks the Call Stack and
+              queues (Microtask and Callback), moving tasks to the Call Stack
+              when it's empty.
+            </p>
           </li>
-
           <li>
-            Q: What's the difference between Microtasks and Macrotasks?
-            <br />
-            A: Microtasks (Promises, process.nextTick) have higher priority and
-            are processed immediately after the current synchronous code.
-            Macrotasks (setTimeout, setInterval) are processed in the next
-            iteration of the event loop.
+            <strong>
+              Q: What's the difference between Microtasks and Macrotasks?
+            </strong>
+            <p>
+              A: Microtasks (Promises, process.nextTick) have higher priority
+              and are processed immediately after the current synchronous code.
+              Macrotasks (setTimeout, setInterval) are processed in the next
+              iteration of the event loop.
+            </p>
           </li>
-
           <li>
-            Q: How does the Virtual DOM improve performance?
-            <br />
-            A: The Virtual DOM creates a lightweight copy of the actual DOM,
-            calculates the minimal necessary changes through diffing, and
-            batches updates to reduce expensive DOM manipulations.
+            <strong>Q: How does the Virtual DOM improve performance?</strong>
+            <p>
+              A: The Virtual DOM creates a lightweight copy of the actual DOM,
+              calculates the minimal necessary changes through diffing, and
+              batches updates to reduce expensive DOM manipulations.
+            </p>
           </li>
-
           <li>
-            Q: What is Reconciliation in React?
-            <br />
-            A: Reconciliation is React's diffing algorithm that determines what
-            changes need to be made to the real DOM by comparing the previous
-            Virtual DOM tree with the new one.
-          </li>
-
-          <li>
-            Q: What is the difference between regular functions and arrow
-            functions regarding 'this'?
-            <br />
-            A: Regular functions have their own 'this' binding based on how
-            they're called, while arrow functions inherit 'this' from their
-            enclosing scope.
-          </li>
-
-          <li>
-            Q: How does 'this' behave in event handlers?
-            <br />
-            A: In regular function event handlers, 'this' refers to the DOM
-            element that triggered the event. In arrow functions, it inherits
-            from the surrounding scope.
-          </li>
-
-          <li>
-            Q: What's the difference between call(), apply(), and bind()?
-            <br />
-            A: call() and apply() immediately invoke the function with a
-            specified 'this' value (apply() takes arguments as an array), while
-            bind() creates a new function with a fixed 'this' value.
-          </li>
-
-          <li>
-            Q: Why doesn't 'this' work in arrow functions as object methods?
-            <br />
-            A: Arrow functions don't have their own 'this' binding; they inherit
-            it from the enclosing scope, which is often not what you want for
-            object methods.
+            <strong>Q: What is Reconciliation in React?</strong>
+            <p>
+              A: Reconciliation is React's diffing algorithm that determines
+              what changes need to be made to the real DOM by comparing the
+              previous Virtual DOM tree with the new one.
+            </p>
           </li>
         </ol>
       </div>

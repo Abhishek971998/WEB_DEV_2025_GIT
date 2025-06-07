@@ -6,20 +6,20 @@
 
 ```javascript
 // Variable declaration
-let name = "John";      // Block-scoped, can be reassigned
-const age = 30;         // Block-scoped, cannot be reassigned
-var legacy = true;      // Function-scoped (avoid using)
+let name = "John"; // Block-scoped, can be reassigned
+const age = 30; // Block-scoped, cannot be reassigned
+var legacy = true; // Function-scoped (avoid using)
 
 // Data types
-let string = "Hello";                  // String
-let number = 42;                       // Number
-let boolean = true;                    // Boolean
-let nullValue = null;                  // Null
-let undefinedValue;                    // Undefined
-let array = [1, 2, 3];                 // Array
+let string = "Hello"; // String
+let number = 42; // Number
+let boolean = true; // Boolean
+let nullValue = null; // Null
+let undefinedValue; // Undefined
+let array = [1, 2, 3]; // Array
 let object = { name: "John", age: 30 }; // Object
-let symbol = Symbol("id");             // Symbol
-let bigInt = 9007199254740991n;        // BigInt
+let symbol = Symbol("id"); // Symbol
+let bigInt = 9007199254740991n; // BigInt
 ```
 
 ### Functions
@@ -31,7 +31,7 @@ function add(a, b) {
 }
 
 // Function expression
-const subtract = function(a, b) {
+const subtract = function (a, b) {
   return a - b;
 };
 
@@ -49,7 +49,7 @@ function sum(...numbers) {
 // Closure
 function createCounter() {
   let count = 0;
-  return function() {
+  return function () {
     return ++count;
   };
 }
@@ -62,26 +62,165 @@ const counter = createCounter();
 const fruits = ["Apple", "Banana", "Cherry"];
 
 // Adding/removing elements
-fruits.push("Date");      // Add to end
-fruits.pop();             // Remove from end
+fruits.push("Date"); // Add to end
+fruits.pop(); // Remove from end
 fruits.unshift("Avocado"); // Add to beginning
-fruits.shift();           // Remove from beginning
+fruits.shift(); // Remove from beginning
 fruits.splice(1, 1, "Blueberry"); // Remove and insert
 
 // Iteration
-fruits.forEach(fruit => console.log(fruit));
-const upperFruits = fruits.map(fruit => fruit.toUpperCase());
-const longFruits = fruits.filter(fruit => fruit.length > 5);
-const allLong = fruits.every(fruit => fruit.length > 3);
-const someLong = fruits.some(fruit => fruit.length > 6);
-const cherry = fruits.find(fruit => fruit === "Cherry");
-const bananaIndex = fruits.findIndex(fruit => fruit === "Banana");
+fruits.forEach((fruit) => console.log(fruit));
+const upperFruits = fruits.map((fruit) => fruit.toUpperCase());
+const longFruits = fruits.filter((fruit) => fruit.length > 5);
+const allLong = fruits.every((fruit) => fruit.length > 3);
+const someLong = fruits.some((fruit) => fruit.length > 6);
+const cherry = fruits.find((fruit) => fruit === "Cherry");
+const bananaIndex = fruits.findIndex((fruit) => fruit === "Banana");
 
 // Other useful methods
 const joined = fruits.join(", ");
 const sorted = [...fruits].sort();
 const reversed = [...fruits].reverse();
 const sliced = fruits.slice(1, 3);
+
+// Original string
+const fruitsStr = "Hello world";
+const upper = fruitsStr.toUpperCase(); //HELLO WORLD;
+console.log("Uppercase:", upper);
+
+// Convert to lowercase
+const lower = fruitsStr.toLowerCase();
+console.log("Lowercase:", lower);
+
+// Check if string includes "Cherry"
+const hasCherry = fruitsStr.includes("Cherry");
+console.log("Includes Cherry:", hasCherry);
+
+// Find index of "Banana"
+const bananaIndex = fruitsStr.indexOf("Banana");
+console.log("Index of Banana:", bananaIndex);
+
+// Slice a portion (characters 6 to 12)
+const sliced = fruitsStr.slice(6, 12);
+console.log("Sliced (6-12):", sliced);
+
+// Get substring (start at 0, length 5)
+const sub = fruitsStr.substring(0, 5);
+console.log("Substring (0-5):", sub);
+
+// Replace "Kiwi" with "Mango"
+const replaced = fruitsStr.replace("Kiwi", "Mango");
+console.log("Replace Kiwi:", replaced);
+
+// Replace all commas with a dash
+const dashed = fruitsStr.replaceAll(",", "-");
+console.log("Replace all commas:", dashed);
+
+// Split string into array
+const fruitsArr = fruitsStr.split(",");
+console.log("Split into array:", fruitsArr);
+
+// Join array into string with spaces
+const joined = fruitsArr.join(" ");
+console.log("Joined with space:", joined);
+
+// Starts with "Apple"
+console.log("Starts with Apple:", fruitsStr.startsWith("Apple"));
+
+// Ends with "Kiwi"
+console.log("Ends with Kiwi:", fruitsStr.endsWith("Kiwi"));
+
+// Trim whitespace
+const messy = "   Hello world!   ";
+console.log("Trimmed:", messy.trim());
+
+// Pad start (add zeros before)
+const padded = "5".padStart(4, "0");
+console.log("Padded Start:", padded);
+
+// Pad end
+const paddedEnd = "5".padEnd(4, "0");
+console.log("Padded End:", paddedEnd);
+
+// Repeat string 3 times
+console.log("Repeat:", "Hi! ".repeat(3));
+
+const fruits = ["Apple", "Banana", "Cherry", "Orange", "Kiwi"];
+
+// .map() – create new array with modified elements
+const upperFruits = fruits.map((fruit) => fruit.toUpperCase());
+console.log("Uppercase Fruits:", upperFruits);
+
+// .filter() – only keep items that pass the condition
+const longFruits = fruits.filter((fruit) => fruit.length > 5);
+console.log("Fruits longer than 5 chars:", longFruits);
+
+// .every() – check if all elements pass the test
+const allLong = fruits.every((fruit) => fruit.length > 3);
+console.log("All fruits longer than 3:", allLong);
+
+// .some() – check if at least one element passes
+const someLong = fruits.some((fruit) => fruit.length > 6);
+console.log("Some fruits longer than 6:", someLong);
+
+// .find() – get the first match
+const cherry = fruits.find((fruit) => fruit === "Cherry");
+console.log("Found Cherry:", cherry);
+
+// .findIndex() – get index of first match
+const bananaIndex = fruits.findIndex((fruit) => fruit === "Banana");
+console.log("Index of Banana:", bananaIndex);
+
+// .includes() – check if value exists
+console.log("Includes Kiwi:", fruits.includes("Kiwi"));
+
+// .indexOf() – first index of element
+console.log("Index of Orange:", fruits.indexOf("Orange"));
+
+// .push() – add to end
+fruits.push("Mango");
+console.log("After push Mango:", fruits);
+
+// .pop() – remove from end
+const last = fruits.pop();
+console.log("Popped:", last, "Fruits:", fruits);
+
+// .unshift() – add to start
+fruits.unshift("Lemon");
+console.log("After unshift Lemon:", fruits);
+
+// .shift() – remove from start
+const first = fruits.shift();
+console.log("Shifted:", first, "Fruits:", fruits);
+
+// .concat() – merge arrays
+const moreFruits = ["Grapes", "Melon"];
+const allFruits = fruits.concat(moreFruits);
+console.log("Concatenated:", allFruits);
+
+// .slice() – get portion without modifying original
+const sliced = fruits.slice(1, 3);
+console.log("Sliced (1-3):", sliced);
+
+// .splice() – add/remove in place
+fruits.splice(2, 1, "Papaya"); // remove 1 at index 2, insert "Papaya"
+console.log("After splice:", fruits);
+
+// .reverse() – reverse array
+const reversed = [...fruits].reverse();
+console.log("Reversed:", reversed);
+
+// .sort() – sort array
+const sorted = [...fruits].sort();
+console.log("Sorted:", sorted);
+
+// .join() – join into string
+const joined = fruits.join(", ");
+console.log("Joined:", joined);
+
+// .reduce() – accumulate into single value
+const totalLength = fruits.reduce((sum, fruit) => sum + fruit.length, 0);
+console.log("Total length of all fruits:", totalLength);
 ```
 
 ### Object Manipulation
@@ -92,14 +231,14 @@ const person = {
   age: 30,
   address: {
     city: "New York",
-    country: "USA"
-  }
+    country: "USA",
+  },
 };
 
 // Object methods
-const keys = Object.keys(person);            // ["name", "age", "address"]
-const values = Object.values(person);        // ["John", 30, {city, country}]
-const entries = Object.entries(person);      // [["name", "John"], ["age", 30], ...]
+const keys = Object.keys(person); // ["name", "age", "address"]
+const values = Object.values(person); // ["John", 30, {city, country}]
+const entries = Object.entries(person); // [["name", "John"], ["age", 30], ...]
 const merged = Object.assign({}, person, { job: "Developer" });
 
 // Spread operator
@@ -107,7 +246,11 @@ const personCopy = { ...person };
 const updated = { ...person, age: 31 };
 
 // Destructuring
-const { name, age, address: { city } } = person;
+const {
+  name,
+  age,
+  address: { city },
+} = person;
 ```
 
 ### Promises & Async/Await
@@ -129,8 +272,8 @@ const fetchData = () => {
 
 // Using Promises
 fetchData()
-  .then(response => console.log(response))
-  .catch(error => console.error(error))
+  .then((response) => console.log(response))
+  .catch((error) => console.error(error))
   .finally(() => console.log("Operation completed"));
 
 // Async/Await
@@ -157,7 +300,7 @@ class Animal {
   constructor(name) {
     this.name = name;
   }
-  
+
   speak() {
     return `${this.name} makes a noise.`;
   }
@@ -177,7 +320,7 @@ const username = user?.name ?? "Anonymous";
 
 // Logical assignment
 let config = {};
-config.debug ??= true;  // Set only if undefined or null
+config.debug ??= true; // Set only if undefined or null
 
 // Destructuring with renaming
 const { name: fullName } = person;
@@ -189,11 +332,11 @@ const { name: fullName } = person;
 
 ```jsx
 // Functional Component (preferred)
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function Counter() {
   const [count, setCount] = useState(0);
-  
+
   return (
     <div>
       <p>Count: {count}</p>
@@ -203,18 +346,18 @@ function Counter() {
 }
 
 // Class Component (legacy)
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class Counter extends Component {
   constructor(props) {
     super(props);
     this.state = { count: 0 };
   }
-  
+
   incrementCount = () => {
     this.setState({ count: this.state.count + 1 });
-  }
-  
+  };
+
   render() {
     return (
       <div>
@@ -231,37 +374,34 @@ class Counter extends Component {
 ```jsx
 // useState - State management
 function Form() {
-  const [username, setUsername] = useState('');
-  
+  const [username, setUsername] = useState("");
+
   return (
-    <input 
-      value={username} 
-      onChange={(e) => setUsername(e.target.value)} 
-    />
+    <input value={username} onChange={(e) => setUsername(e.target.value)} />
   );
 }
 
 // useEffect - Side effects
 function Profile({ userId }) {
   const [user, setUser] = useState(null);
-  
+
   useEffect(() => {
     // Run on mount and when userId changes
-    fetchUser(userId).then(data => setUser(data));
-    
+    fetchUser(userId).then((data) => setUser(data));
+
     return () => {
       // Cleanup function (runs before effect re-runs or on unmount)
-      console.log('Cleaning up');
+      console.log("Cleaning up");
     };
-  }, [userId]);  // Dependency array
-  
+  }, [userId]); // Dependency array
+
   // Empty array [] - runs once on mount
   // No array - runs on every render
   // [dep1, dep2] - runs when dependencies change
 }
 
 // useContext - Context consumption
-const ThemeContext = React.createContext('light');
+const ThemeContext = React.createContext("light");
 
 function ThemedButton() {
   const theme = useContext(ThemeContext);
@@ -271,11 +411,11 @@ function ThemedButton() {
 // useRef - DOM references and mutable values
 function TextInput() {
   const inputRef = useRef(null);
-  
+
   const focusInput = () => {
     inputRef.current.focus();
   };
-  
+
   return (
     <>
       <input ref={inputRef} />
@@ -287,10 +427,13 @@ function TextInput() {
 // useReducer - Complex state logic
 function todoReducer(state, action) {
   switch (action.type) {
-    case 'ADD_TODO':
-      return [...state, { id: Date.now(), text: action.text, completed: false }];
-    case 'TOGGLE_TODO':
-      return state.map(todo => 
+    case "ADD_TODO":
+      return [
+        ...state,
+        { id: Date.now(), text: action.text, completed: false },
+      ];
+    case "TOGGLE_TODO":
+      return state.map((todo) =>
         todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
       );
     default:
@@ -300,23 +443,23 @@ function todoReducer(state, action) {
 
 function TodoList() {
   const [todos, dispatch] = useReducer(todoReducer, []);
-  const [text, setText] = useState('');
-  
+  const [text, setText] = useState("");
+
   const addTodo = () => {
-    dispatch({ type: 'ADD_TODO', text });
-    setText('');
+    dispatch({ type: "ADD_TODO", text });
+    setText("");
   };
-  
+
   return (
     <>
-      <input value={text} onChange={e => setText(e.target.value)} />
+      <input value={text} onChange={(e) => setText(e.target.value)} />
       <button onClick={addTodo}>Add Todo</button>
       <ul>
-        {todos.map(todo => (
+        {todos.map((todo) => (
           <li
             key={todo.id}
-            onClick={() => dispatch({ type: 'TOGGLE_TODO', id: todo.id })}
-            style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
+            onClick={() => dispatch({ type: "TOGGLE_TODO", id: todo.id })}
+            style={{ textDecoration: todo.completed ? "line-through" : "none" }}
           >
             {todo.text}
           </li>
@@ -328,24 +471,23 @@ function TodoList() {
 
 // useMemo - Memoized values
 function ExpensiveCalculation({ a, b }) {
-  
   const result = useMemo(() => {
-    console.log('Calculating...');
+    console.log("Calculating...");
     return a * b * 1000;
-  }, [a, b]);  // Only recalculate when a or b changes
-  
+  }, [a, b]); // Only recalculate when a or b changes
+
   return <p>Result: {result}</p>;
 }
 
 // useCallback - Memoized callbacks
 function ParentComponent() {
   const [count, setCount] = useState(0);
-  
+
   // Function is the same reference between renders
   const handleClick = useCallback(() => {
-    console.log('Button clicked');
-  }, []);  // Empty dependency array = stable reference
-  
+    console.log("Button clicked");
+  }, []); // Empty dependency array = stable reference
+
   return <ChildComponent onClick={handleClick} />;
 }
 ```
@@ -359,7 +501,7 @@ function Welcome(props) {
 }
 
 // Usage
-<Welcome name="Alice" />
+<Welcome name="Alice" />;
 
 // Props destructuring
 function Profile({ name, age, isAdmin = false }) {
@@ -377,9 +519,7 @@ function Card({ title, children }) {
   return (
     <div className="card">
       <h2>{title}</h2>
-      <div className="card-content">
-        {children}
-      </div>
+      <div className="card-content">{children}</div>
     </div>
   );
 }
@@ -388,32 +528,29 @@ function Card({ title, children }) {
 <Card title="Welcome">
   <p>This is the card content</p>
   <button>Click me</button>
-</Card>
+</Card>;
 
 // State updates
 function Counter() {
   const [count, setCount] = useState(0);
-  
+
   // Correct way to update state based on previous state
   const increment = () => {
-    setCount(prevCount => prevCount + 1);
+    setCount((prevCount) => prevCount + 1);
   };
-  
+
   // Multiple state values
-  const [user, setUser] = useState({ name: '', email: '' });
-  
+  const [user, setUser] = useState({ name: "", email: "" });
+
   const updateEmail = (email) => {
-    setUser(prevUser => ({ ...prevUser, email }));
+    setUser((prevUser) => ({ ...prevUser, email }));
   };
-  
+
   return (
     <div>
       <p>Count: {count}</p>
       <button onClick={increment}>Increment</button>
-      <input 
-        value={user.email} 
-        onChange={e => updateEmail(e.target.value)} 
-      />
+      <input value={user.email} onChange={(e) => updateEmail(e.target.value)} />
     </div>
   );
 }
@@ -425,22 +562,22 @@ function Counter() {
 // Functional Component Lifecycle with Hooks
 function ComponentLifecycle() {
   console.log("1. Render phase");
-  
+
   // ComponentDidMount (empty dependency array)
   useEffect(() => {
     console.log("2. Component mounted");
-    
+
     // ComponentWillUnmount (return a cleanup function)
     return () => {
       console.log("4. Component will unmount");
     };
   }, []);
-  
+
   // ComponentDidUpdate (with dependencies)
   useEffect(() => {
     console.log("3. Component updated or mounted");
   });
-  
+
   return <div>Lifecycle Component</div>;
 }
 ```
@@ -454,23 +591,23 @@ function EventHandling() {
     e.preventDefault();
     console.log("Button clicked");
   };
-  
+
   return (
     <div>
       <button onClick={handleClick}>Click Me</button>
-      
+
       {/* Inline function with parameters */}
-      <button onClick={(e) => {
-        e.stopPropagation();
-        console.log("Another button clicked");
-      }}>
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          console.log("Another button clicked");
+        }}
+      >
         Another Button
       </button>
-      
+
       {/* Binding parameters */}
-      <button onClick={() => handleClick(42)}>
-        Button with Params
-      </button>
+      <button onClick={() => handleClick(42)}>Button with Params</button>
     </div>
   );
 }
@@ -481,25 +618,25 @@ function EventHandling() {
 ```jsx
 function SimpleForm() {
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    message: '',
-    agreement: false
+    username: "",
+    email: "",
+    message: "",
+    agreement: false,
   });
-  
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prevData => ({
+    setFormData((prevData) => ({
       ...prevData,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    console.log("Form submitted:", formData);
   };
-  
+
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -511,7 +648,7 @@ function SimpleForm() {
           onChange={handleChange}
         />
       </div>
-      
+
       <div>
         <label htmlFor="email">Email:</label>
         <input
@@ -522,7 +659,7 @@ function SimpleForm() {
           onChange={handleChange}
         />
       </div>
-      
+
       <div>
         <label htmlFor="message">Message:</label>
         <textarea
@@ -532,7 +669,7 @@ function SimpleForm() {
           onChange={handleChange}
         />
       </div>
-      
+
       <div>
         <label>
           <input
@@ -544,7 +681,7 @@ function SimpleForm() {
           I agree to terms
         </label>
       </div>
-      
+
       <button type="submit">Submit</button>
     </form>
   );
@@ -559,33 +696,27 @@ function ConditionalRendering({ isLoggedIn, role, items }) {
   if (!isLoggedIn) {
     return <LoginForm />;
   }
-  
+
   return (
     <div>
       {/* Ternary operator */}
-      <div>
-        {role === 'admin' 
-          ? <AdminPanel /> 
-          : <UserPanel />}
-      </div>
-      
+      <div>{role === "admin" ? <AdminPanel /> : <UserPanel />}</div>
+
       {/* Logical AND */}
-      {items.length > 0 && (
-        <ItemList items={items} />
-      )}
-      
+      {items.length > 0 && <ItemList items={items} />}
+
       {/* Element variables */}
       {(() => {
         switch (role) {
-          case 'admin':
+          case "admin":
             return <AdminPanel />;
-          case 'moderator':
+          case "moderator":
             return <ModeratorPanel />;
           default:
             return <UserPanel />;
         }
       })()}
-      
+
       {/* Null pattern for hiding */}
       {isLoggedIn ? <LogoutButton /> : null}
     </div>
@@ -601,9 +732,7 @@ function TodoList({ todos }) {
     <ul>
       {todos.map((todo) => (
         // Always use unique keys when mapping
-        <li key={todo.id}>
-          {todo.text}
-        </li>
+        <li key={todo.id}>{todo.text}</li>
       ))}
     </ul>
   );
@@ -625,16 +754,16 @@ function StringList({ items }) {
 
 ```jsx
 // 1. Create Context
-const ThemeContext = React.createContext('light');
+const ThemeContext = React.createContext("light");
 
 // 2. Create Provider
 function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState('light');
-  
+  const [theme, setTheme] = useState("light");
+
   const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
-  
+
   // The value prop contains what will be available to consumers
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
@@ -646,13 +775,13 @@ function ThemeProvider({ children }) {
 // 3. Consume context in components
 function ThemedButton() {
   const { theme, toggleTheme } = useContext(ThemeContext);
-  
+
   return (
-    <button 
+    <button
       onClick={toggleTheme}
-      style={{ 
-        background: theme === 'dark' ? '#333' : '#f0f0f0',
-        color: theme === 'dark' ? '#fff' : '#000'
+      style={{
+        background: theme === "dark" ? "#333" : "#f0f0f0",
+        color: theme === "dark" ? "#fff" : "#000",
       }}
     >
       Toggle Theme
@@ -689,7 +818,7 @@ class ErrorBoundary extends React.Component {
 
   componentDidCatch(error, errorInfo) {
     // Log error to error reporting service
-    console.error('Error caught:', error, errorInfo);
+    console.error("Error caught:", error, errorInfo);
   }
 
   render() {
@@ -713,15 +842,15 @@ function App() {
 ### React Router (v6)
 
 ```jsx
-import { 
-  BrowserRouter, 
-  Routes, 
-  Route, 
-  Link, 
-  useParams, 
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  useParams,
   useNavigate,
-  Outlet
-} from 'react-router-dom';
+  Outlet,
+} from "react-router-dom";
 
 function App() {
   return (
@@ -731,18 +860,18 @@ function App() {
         <Link to="/about">About</Link>
         <Link to="/users">Users</Link>
       </nav>
-      
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        
+
         {/* Nested routes */}
         <Route path="/users" element={<UserLayout />}>
           <Route index element={<UserList />} />
           <Route path=":userId" element={<UserDetail />} />
           <Route path="settings" element={<UserSettings />} />
         </Route>
-        
+
         {/* Catch-all route */}
         <Route path="*" element={<NotFound />} />
       </Routes>
@@ -764,15 +893,15 @@ function UserLayout() {
 function UserDetail() {
   const { userId } = useParams();
   const navigate = useNavigate();
-  
+
   const goBack = () => {
     navigate(-1); // Go back one page
   };
-  
+
   const goToSettings = () => {
-    navigate('/users/settings'); // Programmatic navigation
+    navigate("/users/settings"); // Programmatic navigation
   };
-  
+
   return (
     <div>
       <h2>User Details for {userId}</h2>
@@ -800,7 +929,7 @@ const areEqual = (prevProps, nextProps) => {
 const MemoizedWithCustomComparison = React.memo(MyComponent, areEqual);
 
 // lazy loading with Suspense
-const LazyComponent = React.lazy(() => import('./LazyComponent'));
+const LazyComponent = React.lazy(() => import("./LazyComponent"));
 
 function App() {
   return (
@@ -818,52 +947,48 @@ function App() {
 function useForm(initialValues) {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
-  
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setValues({
       ...values,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     });
   };
-  
+
   const resetForm = () => {
     setValues(initialValues);
     setErrors({});
   };
-  
+
   return {
     values,
     errors,
     handleChange,
     resetForm,
     setValues,
-    setErrors
+    setErrors,
   };
 }
 
 // Usage
 function RegisterForm() {
   const { values, handleChange, resetForm } = useForm({
-    username: '',
-    email: '',
-    password: ''
+    username: "",
+    email: "",
+    password: "",
   });
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Form validation logic here
-    console.log('Submitting:', values);
+    console.log("Submitting:", values);
     resetForm();
   };
-  
+
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        name="username"
-        value={values.username}
-        onChange={handleChange}
-      />
+      <input name="username" value={values.username} onChange={handleChange} />
       {/* Other inputs */}
       <button type="submit">Register</button>
     </form>
@@ -877,23 +1002,23 @@ function RegisterForm() {
 
 ```jsx
 // Actions
-const ADD_TODO = 'ADD_TODO';
-const TOGGLE_TODO = 'TOGGLE_TODO';
+const ADD_TODO = "ADD_TODO";
+const TOGGLE_TODO = "TOGGLE_TODO";
 
 // Action creators
 const addTodo = (text) => ({
   type: ADD_TODO,
-  payload: { text }
+  payload: { text },
 });
 
 const toggleTodo = (id) => ({
   type: TOGGLE_TODO,
-  payload: { id }
+  payload: { id },
 });
 
 // Reducer
 const initialState = {
-  todos: []
+  todos: [],
 };
 
 function todoReducer(state = initialState, action) {
@@ -906,18 +1031,18 @@ function todoReducer(state = initialState, action) {
           {
             id: Date.now(),
             text: action.payload.text,
-            completed: false
-          }
-        ]
+            completed: false,
+          },
+        ],
       };
     case TOGGLE_TODO:
       return {
         ...state,
-        todos: state.todos.map(todo =>
+        todos: state.todos.map((todo) =>
           todo.id === action.payload.id
             ? { ...todo, completed: !todo.completed }
             : todo
-        )
+        ),
       };
     default:
       return state;
@@ -925,56 +1050,56 @@ function todoReducer(state = initialState, action) {
 }
 
 // Store setup with Redux Toolkit
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 
 const store = configureStore({
   reducer: {
-    todos: todoReducer
-  }
+    todos: todoReducer,
+  },
 });
 
 // Modern Redux with Redux Toolkit
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const todosSlice = createSlice({
-  name: 'todos',
+  name: "todos",
   initialState: {
-    list: []
+    list: [],
   },
   reducers: {
     addTodo: (state, action) => {
       state.list.push({
         id: Date.now(),
         text: action.payload,
-        completed: false
+        completed: false,
       });
     },
     toggleTodo: (state, action) => {
-      const todo = state.list.find(todo => todo.id === action.payload);
+      const todo = state.list.find((todo) => todo.id === action.payload);
       if (todo) {
         todo.completed = !todo.completed;
       }
-    }
-  }
+    },
+  },
 });
 
 export const { addTodo, toggleTodo } = todosSlice.actions;
 export default todosSlice.reducer;
 
 // React-Redux hooks
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 
 function TodoList() {
-  const todos = useSelector(state => state.todos.list);
+  const todos = useSelector((state) => state.todos.list);
   const dispatch = useDispatch();
-  
+
   return (
     <ul>
-      {todos.map(todo => (
+      {todos.map((todo) => (
         <li
           key={todo.id}
           onClick={() => dispatch(toggleTodo(todo.id))}
-          style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
+          style={{ textDecoration: todo.completed ? "line-through" : "none" }}
         >
           {todo.text}
         </li>
@@ -987,13 +1112,13 @@ function TodoList() {
 ### React Query (TanStack Query)
 
 ```jsx
-import { 
-  QueryClient, 
+import {
+  QueryClient,
   QueryClientProvider,
   useQuery,
   useMutation,
-  useQueryClient
-} from '@tanstack/react-query';
+  useQueryClient,
+} from "@tanstack/react-query";
 
 // Setup
 const queryClient = new QueryClient();
@@ -1009,16 +1134,16 @@ function App() {
 // Data fetching
 function TodoList() {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['todos'],
-    queryFn: () => fetch('/api/todos').then(res => res.json())
+    queryKey: ["todos"],
+    queryFn: () => fetch("/api/todos").then((res) => res.json()),
   });
-  
+
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-  
+
   return (
     <ul>
-      {data.map(todo => (
+      {data.map((todo) => (
         <li key={todo.id}>{todo.text}</li>
       ))}
     </ul>
@@ -1028,31 +1153,31 @@ function TodoList() {
 // Mutations (create, update, delete)
 function AddTodo() {
   const queryClient = useQueryClient();
-  
+
   const mutation = useMutation({
-    mutationFn: (newTodo) => 
-      fetch('/api/todos', {
-        method: 'POST',
-        body: JSON.stringify(newTodo)
-      }).then(res => res.json()),
+    mutationFn: (newTodo) =>
+      fetch("/api/todos", {
+        method: "POST",
+        body: JSON.stringify(newTodo),
+      }).then((res) => res.json()),
     onSuccess: () => {
       // Invalidate and refetch after successful mutation
-      queryClient.invalidateQueries(['todos']);
-    }
+      queryClient.invalidateQueries(["todos"]);
+    },
   });
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const text = e.target.todo.value;
     mutation.mutate({ text, completed: false });
     e.target.reset();
   };
-  
+
   return (
     <form onSubmit={handleSubmit}>
       <input name="todo" />
       <button type="submit" disabled={mutation.isLoading}>
-        {mutation.isLoading ? 'Adding...' : 'Add Todo'}
+        {mutation.isLoading ? "Adding..." : "Add Todo"}
       </button>
     </form>
   );
