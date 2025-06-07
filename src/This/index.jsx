@@ -5,8 +5,8 @@ THEORY: 'this' Keyword in JavaScript
 
 1. What is 'this'?
    - 'this' is a special keyword that refers to the current execution context
-   - Its value depends on how and where a function is called, not where it's defined
-   - Understanding 'this' is crucial for object-oriented programming in JavaScript
+   -  Its value depends on how and where a function is called, not where it's defined
+   -  Understanding 'this' is crucial for object-oriented programming in JavaScript
 
 2. Rules for 'this':
    a) Global Context:

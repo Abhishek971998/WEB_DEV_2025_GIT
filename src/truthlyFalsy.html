@@ -127,8 +127,11 @@ if (-0) console.log("Falsy!");       // ❌ Doesn't run
 if ("") console.log("Falsy!");       // ❌ Doesn't run (empty string is falsy)
 if (NaN) console.log("Falsy!");      // ❌ Doesn't run
 if (undefined) console.log("Falsy!"); // ❌ Doesn't run
-        </pre
-      >
+<!-- // use Object.is() for better type check -->
+
+<!-- Boxing where type are changed,  methods on premitive values converts to objects  -->
+
+        </pre>
     </div>
   </body>
 </html>

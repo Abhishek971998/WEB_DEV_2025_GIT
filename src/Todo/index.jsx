@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./style.css"; // Include CSS in the same file
+import "./style.scss"; // Include CSS in the same file
 
 function TodoApp() {
   const [todoList, setTodoList] = useState([]);

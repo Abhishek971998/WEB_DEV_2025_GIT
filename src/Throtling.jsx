@@ -1,13 +1,27 @@
 import React from "react";
 
-function throttle(func, delay) {
+// function throttle(func, delay) {
+//   let canRun = true;
+
+//   return function (...args) {
+//     if (!canRun) return;
+
+//     canRun = false;
+//     func(...args);
+
+//     setTimeout(() => {
+//       canRun = true;
+//     }, delay);
+//   };
+// }
+
+function throttle(fn, delay) {
   let canRun = true;
 
   return function (...args) {
     if (!canRun) return;
-
     canRun = false;
-    func(...args);
+    fn(...args);
 
     setTimeout(() => {
       canRun = true;
@@ -19,7 +33,7 @@ function ThrottleButtonExample() {
   const handleClick = throttle(() => {
     console.log("Button clicked! 🚀");
     // alert("Button clicked! 🚀");
-  }, 1000);
+  }, 3000);
 
   return (
     <div>

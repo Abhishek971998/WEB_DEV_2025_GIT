@@ -15,13 +15,56 @@ import FrontendFAQ from "./OptimizeQuestions";
 import ThisKeyword from "./This";
 import CodeBlock from "./CodeBlocks";
 import { Navigation } from "./components/Navigation";
+import EventLoop from "./EventLoop";
+import MostAskedTheory from "./MostAskedTheory";
+
+const routes = [
+  {
+    path: "/string-problems",
+    element: <StringProblems />,
+    label: "String Problems",
+  },
+  { path: "/array-methods", element: <ArrayMethods />, label: "Array Methods" },
+  { path: "/all-hooks", element: <AllHooks />, label: "All Hooks" },
+  { path: "/modal", element: <Modal />, label: "Modal" },
+  { path: "/react-play", element: <ReactPlay />, label: "React Play" },
+  {
+    path: "/re-render-problem",
+    element: <ReRenderProblem />,
+    label: "Re-render Problem",
+  },
+  {
+    path: "/re-render-solution",
+    element: <ReRenderSolution />,
+    label: "Re-render Solution",
+  },
+  { path: "/debounce-new", element: <DebounceNew />, label: "Debounce New" },
+  {
+    path: "/throttle-example",
+    element: <ThrottleExample />,
+    label: "Throttle Example",
+  },
+  { path: "/playground", element: <Playground />, label: "Playground" },
+  { path: "/debouncing", element: <Debouncing />, label: "Debouncing" },
+  { path: "/todo", element: <TodoApp />, label: "Todo App" },
+  { path: "/FEFAQ", element: <FrontendFAQ />, label: "FrontendFAQ" },
+  { path: "/ThisKeyword", element: <ThisKeyword />, label: "ThisKeyword" },
+  { path: "/CodeBlock", element: <CodeBlock />, label: "CodeBlock" },
+  { path: "/EventLopp", element: <EventLoop />, label: "EventLopp" },
+  {
+    path: "/MostAskedTheory",
+    element: <MostAskedTheory />,
+    label: "MostAskedTheory",
+  },
+  { path: "/react", element: <CodeBlock />, label: "React" },
+  { path: "/javascript", element: <CodeBlock />, label: "JavaScript" },
+];
 
 function App() {
   return (
     <Router>
       <div>
         <Navigation />
-
         <nav>
           <ul
             style={{
@@ -34,78 +77,18 @@ function App() {
               background: "#282c34",
             }}
           >
-            <li>
-              <Link to="/string-problems">String Problems</Link>
-            </li>
-            <li>
-              <Link to="/array-methods">Array Methods</Link>
-            </li>
-            <li>
-              <Link to="/all-hooks">All Hooks</Link>
-            </li>
-            <li>
-              <Link to="/modal">Modal</Link>
-            </li>
-            <li>
-              <Link to="/react-play">React Play</Link>
-            </li>
-            <li>
-              <Link to="/re-render-problem">Re-render Problem</Link>
-            </li>
-            <li>
-              <Link to="/re-render-solution">Re-render Solution</Link>
-            </li>
-            <li>
-              <Link to="/debounce-new">Debounce New</Link>
-            </li>
-            <li>
-              <Link to="/throttle-example">Throttle Example</Link>
-            </li>
-            <li>
-              <Link to="/playground">Playground</Link>
-            </li>
-            <li>
-              <Link to="/debouncing">Debouncing</Link>
-            </li>
-            <li>
-              <Link to="/todo">Todo App</Link>
-            </li>
-            <li>
-              <Link to="/FEFAQ">FrontendFAQ</Link>
-            </li>
-            <li>
-              <Link to="/ThisKeyword">ThisKeyword</Link>
-            </li>
-            <li>
-              <Link to="/CodeBlock">CodeBlock</Link>
-            </li>
+            {routes.map(({ path, label }) => (
+              <li key={path}>
+                <Link to={path}>{label}</Link>
+              </li>
+            ))}
           </ul>
         </nav>
 
         <Routes>
-          <Route path="/string-problems" element={<StringProblems />} />
-          <Route path="/array-methods" element={<ArrayMethods />} />
-          <Route path="/all-hooks" element={<AllHooks />} />
-          <Route path="/modal" element={<Modal />} />
-          <Route path="/react-play" element={<ReactPlay />} />
-          <Route path="/re-render-problem" element={<ReRenderProblem />} />
-          <Route path="/re-render-solution" element={<ReRenderSolution />} />
-          <Route path="/debounce-new" element={<DebounceNew />} />
-          <Route path="/throttle-example" element={<ThrottleExample />} />
-          <Route path="/playground" element={<Playground />} />
-          <Route path="/debouncing" element={<Debouncing />} />
-          <Route path="/todo" element={<TodoApp />} />
-          <Route path="/FEFAQ" element={<FrontendFAQ />} />
-          <Route path="/ThisKeyword" element={<ThisKeyword />} />
-
-          <Route path="/react" element={<CodeBlock />} />
-          <Route path="/javascript" element={<CodeBlock />} />
-
-          {/* <Route
-            path="/javascript"
-            element={<TopicList category="javascript" />}
-          />
-          <Route path="/react" element={<TopicList category="react" />} /> */}
+          {routes.map(({ path, element }) => (
+            <Route key={path} path={path} element={element} />
+          ))}
         </Routes>
       </div>
     </Router>

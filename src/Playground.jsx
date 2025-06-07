@@ -1,46 +1,46 @@
-import { useState } from "react";
+import React from "react";
+import { createStore } from "redux";
+import { Provider, useSelector, useDispatch } from "react-redux";
 
-function MouseTracker(props) {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+//Action Types
 
-  const handleMouseMove = (e) => {
-    setMousePosition({ x: e.clientX, y: e.clientY });
+const INCREMENT = "INCREMENT";
 
-    // Callback: Notify parent
-    if (props.mycb) {
-      props.mycb({ x: e.clientX, y: e.clientY });
-    }
-  };
-
-  return (
-    <div
-      onMouseMove={handleMouseMove}
-      style={{ height: "300px", border: "1px solid #ccc" }}
-    >
-      {/* Render Prop: Control what gets displayed */}
-      {props.callMy(mousePosition)}
-    </div>
-  );
+//ACTION METHODS
+function increment() {
+  return { type: INCREMENT };
 }
 
-export default function App() {
-  function mycb(params) {
-    console.log(params, "Hello app");
+// STORE
+const initialState = { count: 0 };
+
+//REducer
+
+function counterReducer(state = initialState, action) {
+  switch (action.type) {
+    case "INCREMENT":
+      return { count: state.count + 1 };
+
+    default:
+      return state;
   }
+}
+
+const store = createStore(counterReducer);
+
+export default function Playground() {
+  const countValue = useSelector((state) => state.count);
+
+  const dispatch = useDispatch();
+
+  console.log(countValue, "countValue");
 
   return (
     <div>
-      <h1>Render Props & Callback Example</h1>
-      <MouseTracker
-        mycb={mycb} // Callback to log position
-        callMy={(
-          position // Render prop to display position
-        ) => (
-          <p>
-            Mouse position: {position.x}, {position.y}
-          </p>
-        )}
-      />
+      <Provider store={store}>
+        <button onClick={dispatch(increment())}> </button>
+        Hello world {countValue}
+      </Provider>
     </div>
   );
 }

@@ -40,3 +40,29 @@ const App = () => {
 };
 
 export default App;
+
+const MyContext_ = createContext();
+
+const MyProvider_ = ({ children }) => {
+  const [user, setUser] = useState("John Doe");
+  return (
+    <MyContext.Provider value={{ user, setUser }}>
+      <div>{children}</div>
+    </MyContext.Provider>
+  );
+};
+
+function UserComponent_(params) {
+  const {user, setUser} = useContext(MyContext);
+
+
+  return (
+    <button></button>
+  )
+  
+}
+function App_() {
+  <MyProvider_>
+    <UserComponent />
+  </MyProvider_>;
+}
