@@ -53,13 +53,9 @@ const MyProvider_ = ({ children }) => {
 };
 
 function UserComponent_(params) {
-  const {user, setUser} = useContext(MyContext);
+  // const {user, setUser} = useContext(MyContext);
 
-
-  return (
-    <button></button>
-  )
-  
+  return <button></button>;
 }
 function App_() {
   <MyProvider_>
