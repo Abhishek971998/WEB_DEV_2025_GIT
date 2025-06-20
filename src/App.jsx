@@ -17,6 +17,13 @@ import CodeBlock from "./CodeBlocks";
 import { Navigation } from "./components/Navigation";
 import EventLoopFlashcard from "./EventLoop";
 import MostAskedTheory from "./MostAskedTheory";
+import React19 from "./React19";
+import TypeScriptExample from "./components/TypeScriptExample";
+import ReduxSaga from "./ReduxSaga/ReduxSaga";
+import AdvanceJS from "./JSadvance";
+import ReactHooksQnA from "./Hooks/HooksQNA";
+
+import Redux from "./Redux/AllinOne";
 
 const routes = [
   {
@@ -28,6 +35,7 @@ const routes = [
   { path: "/all-hooks", element: <AllHooks />, label: "All Hooks" },
   { path: "/modal", element: <Modal />, label: "Modal" },
   { path: "/react-play", element: <ReactPlay />, label: "React Play" },
+
   {
     path: "/re-render-problem",
     element: <ReRenderProblem />,
@@ -61,8 +69,35 @@ const routes = [
     element: <MostAskedTheory />,
     label: "MostAskedTheory",
   },
+  { path: "/react19", element: <React19 />, label: "React 19" },
+
   { path: "/react", element: <CodeBlock />, label: "React" },
   { path: "/javascript", element: <CodeBlock />, label: "JavaScript" },
+  {
+    path: "/type-play",
+    element: <TypeScriptExample />,
+    label: "TypeScript Play",
+  },
+  {
+    path: "/redux",
+    element: <Redux />,
+    label: "Redux",
+  },
+  {
+    path: "/redux-saga",
+    element: <ReduxSaga />,
+    label: "Redux Saga",
+  },
+  {
+    path: "/advance-js",
+    element: <AdvanceJS />,
+    label: "Advnace javasript",
+  },
+  {
+    path: "/hooks-QnA",
+    element: <ReactHooksQnA />,
+    label: "  Hooks QnA",
+  },
 ];
 
 function App() {

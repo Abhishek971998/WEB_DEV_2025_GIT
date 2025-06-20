@@ -1,118 +1,251 @@
+/* eslint-disable no-unused-vars */
 import React, {
   useState,
   useEffect,
-  useCallback,
   useMemo,
-  useContext,
-  memo,
+  useCallback,
+  useRef,
 } from "react";
+import "./Re-Render-Solution.css";
 
-// ======================================================
-// SOLUTION 1: Using React.memo and useCallback/useMemo
-// ======================================================
-const ParentWithPropSolution = () => {
-  const [count, setCount] = useState(0);
-
-  // Use useMemo to memoize the object
-  const userInfo = useMemo(() => {
-    return { name: "John", id: 123 };
-  }, []); // Empty dependency array means this is created only once
-
-  // Use useCallback to memoize the function
-  const handleClick = useCallback(() => {
-    console.log("Button clicked");
-  }, []); // Empty dependency array means this is created only once
+// Tab Navigation Component - No optimization needed as it's a simple component
+const TabNavigation = ({ activeTab, onTabChange }) => {
+  const tabs = [
+    { id: "prop-changes", label: "Prop Changes" },
+    { id: "state-updates", label: "State Updates" },
+    { id: "context", label: "Context" },
+    { id: "expensive", label: "Expensive Calc" },
+    { id: "effects", label: "Effects" },
+  ];
 
   return (
-    <div>
-      <h2>Solution 1: useCallback, useMemo, and React.memo</h2>
-      <button onClick={() => setCount(count + 1)}>
-        Parent render count: {count}
-      </button>
-
-      {/* MemoizedChildComponent only rerenders if props change */}
-      <MemoizedChildComponent userInfo={userInfo} onButtonClick={handleClick} />
+    <div className="tab-navigation">
+      {tabs.map((tab) => (
+        <button
+          key={tab.id}
+          className={`tab-button ${activeTab === tab.id ? "active" : ""}`}
+          onClick={() => onTabChange(tab.id)}
+        >
+          {tab.label}
+        </button>
+      ))}
     </div>
   );
 };
 
-// Use React.memo to prevent rerenders if props haven't changed
-const MemoizedChildComponent = memo(({ userInfo, onButtonClick }) => {
-  console.log("MemoizedChildComponent rendered");
+// Logger Component - Memoized to prevent unnecessary re-renders
+const Logger = React.memo(({ logs }) => {
   return (
-    <div>
-      <p>User: {userInfo.name}</p>
-      <button onClick={onButtonClick}>Click me</button>
+    <div className="log-container">
+      <h3 className="log-title">Render & State Changes</h3>
+      <div className="log-content">
+        {logs.map((log, index) => (
+          <div key={index} className="log-entry">
+            <span className="log-time">{log.time}</span>
+            <span className="log-message">{log.message}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 });
 
 // ======================================================
-// SOLUTION 2: Component Composition to Avoid Unnecessary Rerenders
+// EXAMPLE 1: Prop Changes Causing Excessive Rerenders
+// Problem:
+// 1. userInfo object was recreated on every render
+// 2. handleClick function was recreated on every render
+// Solution:
+// 1. Used useMemo for userInfo to maintain reference stability
+// 2. Used useCallback for handleClick to maintain function reference
+// 3. Memoized ChildComponent to prevent unnecessary re-renders
 // ======================================================
-const ParentWithComponentComposition = () => {
+
+// Memoized child component to prevent unnecessary re-renders
+const ChildComponent = React.memo(
+  ({ userInfo, onButtonClick, renderCount }) => {
+    return (
+      <div className="child-container">
+        <p>User: {userInfo.name}</p>
+        <p>Child Render Count: {renderCount}</p>
+        <button className="action-button" onClick={onButtonClick}>
+          Trigger Child Render
+        </button>
+      </div>
+    );
+  }
+);
+
+const ParentWithPropProblem = () => {
+  const [count, setCount] = useState(0);
+  const [renderCount, setRenderCount] = useState(0);
+  const [logs, setLogs] = useState([]);
+
+  // Memoized object to prevent recreation on every render
+  const userInfo = useMemo(() => ({ name: "John", id: 123 }), []);
+
+  // Memoized callback to prevent recreation on every render
+  const handleClick = useCallback(() => {
+    setRenderCount((prev) => prev + 1);
+    setLogs((prev) => [
+      ...prev,
+      {
+        time: new Date().toLocaleTimeString(),
+        message: "Child component rendered due to callback",
+      },
+    ]);
+  }, []);
+
+  return (
+    <div className="solution-container">
+      <div className="solution-content">
+        <h2 className="solution-title">Problem 1: New Props on Every Render</h2>
+        <div className="counter-container">
+          <p className="count-text">Parent render count: {count}</p>
+          <button className="action-button" onClick={() => setCount(count + 1)}>
+            Update Parent Count
+          </button>
+        </div>
+        <ChildComponent
+          userInfo={userInfo}
+          onButtonClick={handleClick}
+          renderCount={renderCount}
+        />
+      </div>
+      <Logger logs={logs} />
+    </div>
+  );
+};
+
+// ======================================================
+// EXAMPLE 2: State Updates in Parent Cause Child Rerenders
+// Problem: Child component re-renders when parent's unrelated state changes
+// Solution:
+// 1. Used React.memo for ChildCounter to prevent re-renders when props haven't changed
+// 2. Memoized callback functions to maintain reference stability
+// ======================================================
+
+// Memoized ChildCounter component to prevent unnecessary re-renders
+const ChildCounter = React.memo(({ count, onIncrement }) => {
+  console.log("👶 ChildCounter rendered");
+  return (
+    <div className="child-container">
+      <p className="count-text">Count: {count}</p>
+      <button className="action-button" onClick={onIncrement}>
+        Increment Count
+      </button>
+    </div>
+  );
+});
+
+const ParentWithStateUpdates = () => {
   const [count, setCount] = useState(0);
   const [unrelatedState, setUnrelatedState] = useState(0);
+  const [logs, setLogs] = useState([]);
 
-  // Define increment function
-  const handleIncrement = () => setCount(count + 1);
+  const logUpdate = useCallback((message) => {
+    setLogs((prev) => [
+      ...prev,
+      { time: new Date().toLocaleTimeString(), message },
+    ]);
+  }, []);
+
+  const handleUnrelatedUpdate = useCallback(() => {
+    setUnrelatedState((prev) => prev + 1);
+    logUpdate("Unrelated state updated - Child will NOT re-render if memoized");
+  }, [logUpdate]);
+
+  const handleCountUpdate = useCallback(() => {
+    setCount((prev) => prev + 1);
+    logUpdate("Count updated - Child will re-render");
+  }, [logUpdate]);
 
   return (
-    <div>
-      <h2>Solution 2: Component Composition</h2>
-      <button onClick={() => setUnrelatedState(unrelatedState + 1)}>
-        Update unrelated state: {unrelatedState}
-      </button>
-
-      {/* Pass children as props to make updates more isolated */}
-      <CounterContainer>
-        <CounterDisplay count={count} />
-        <CounterButton onIncrement={handleIncrement} />
-      </CounterContainer>
+    <div className="solution-container">
+      <div className="solution-content">
+        <h2 className="solution-title">Problem 2: Unrelated State Updates</h2>
+        <div className="counter-container">
+          <p className="count-text">Unrelated State: {unrelatedState}</p>
+          <button className="action-button" onClick={handleUnrelatedUpdate}>
+            Update Unrelated State
+          </button>
+        </div>
+        <ChildCounter count={count} onIncrement={handleCountUpdate} />
+      </div>
+      <Logger logs={logs} />
     </div>
   );
 };
 
-// This component just renders its children - won't cause rerenders
-const CounterContainer = ({ children }) => {
-  return <div className="counter-container">{children}</div>;
-};
-
-// These components only rerender when their specific props change
-const CounterDisplay = memo(({ count }) => {
-  console.log("CounterDisplay rendered");
-  return <p>Count: {count}</p>;
-});
-
-const CounterButton = memo(({ onIncrement }) => {
-  console.log("CounterButton rendered");
-  return <button onClick={onIncrement}>Increment</button>;
-});
-
 // ======================================================
-// SOLUTION 3: Optimized Context with Separate Providers
+// EXAMPLE 3: Context Causing Widespread Rerenders
+// Problem: All components re-render when context value changes
+// Solution:
+// 1. Split context into multiple contexts (theme and count)
+// 2. Memoized context values
+// 3. Used React.memo for components that don't need to re-render
 // ======================================================
 const ThemeContext = React.createContext();
 const CountContext = React.createContext();
 
-const OptimizedContextExample = () => {
+const ThemedComponent = React.memo(() => {
+  const { theme, toggleTheme } = React.useContext(ThemeContext);
+  return (
+    <div className={`themed-container ${theme}`}>
+      <p>Current theme: {theme}</p>
+      <button className="action-button" onClick={toggleTheme}>
+        Toggle Theme
+      </button>
+    </div>
+  );
+});
+
+const CountDisplay = React.memo(() => {
+  console.log("CountDisplay");
+  return (
+    <div className="count-container">
+      <p>This component doesn't use count but still rerenders</p>
+    </div>
+  );
+});
+
+const ContextExample = () => {
   const [theme, setTheme] = useState("light");
   const [count, setCount] = useState(0);
+  const [logs, setLogs] = useState([]);
 
-  // Memoize the theme value to prevent unnecessary renders
+  // Memoized theme context value
   const themeValue = useMemo(
     () => ({
       theme,
-      toggleTheme: () => setTheme(theme === "light" ? "dark" : "light"),
+      toggleTheme: () => {
+        setTheme((prev) => (prev === "light" ? "dark" : "light"));
+        setLogs((prev) => [
+          ...prev,
+          {
+            time: new Date().toLocaleTimeString(),
+            message: "Theme changed - Components will re-render",
+          },
+        ]);
+      },
     }),
     [theme]
   );
 
-  // Memoize the count value
+  // Memoized count context value
   const countValue = useMemo(
     () => ({
       count,
-      increment: () => setCount(count + 1),
+      incrementCount: () => {
+        setCount((prev) => prev + 1);
+        setLogs((prev) => [
+          ...prev,
+          {
+            time: new Date().toLocaleTimeString(),
+            message: "Count updated - Components will re-render",
+          },
+        ]);
+      },
     }),
     [count]
   );
@@ -120,68 +253,34 @@ const OptimizedContextExample = () => {
   return (
     <ThemeContext.Provider value={themeValue}>
       <CountContext.Provider value={countValue}>
-        <h2>Solution 3: Optimized Context</h2>
-        <OptimizedThemedComponent />
-        <OptimizedCountDisplay />
+        <div className="solution-container">
+          <div className="solution-content">
+            <h2 className="solution-title">Problem 3: Context Rerenders</h2>
+            <div className="counter-container">
+              <p className="count-text">Count: {count}</p>
+              <button
+                className="action-button"
+                onClick={countValue.incrementCount}
+              >
+                Update Count
+              </button>
+            </div>
+            <ThemedComponent />
+            <CountDisplay />
+          </div>
+          <Logger logs={logs} />
+        </div>
       </CountContext.Provider>
     </ThemeContext.Provider>
   );
 };
 
-// Only rerenders when theme changes
-const OptimizedThemedComponent = memo(() => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
-  console.log("OptimizedThemedComponent rendered");
-
-  return (
-    <div
-      style={{
-        background: theme === "light" ? "#fff" : "#333",
-        color: theme === "light" ? "#000" : "#fff",
-      }}
-    >
-      <p>Current theme: {theme}</p>
-      <button onClick={toggleTheme}>Toggle Theme</button>
-    </div>
-  );
-});
-
-// Only rerenders when count changes
-const OptimizedCountDisplay = memo(() => {
-  const { count, increment } = useContext(CountContext);
-  console.log("OptimizedCountDisplay rendered");
-
-  return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={increment}>Increment</button>
-    </div>
-  );
-});
-
 // ======================================================
-// SOLUTION 4: Using useMemo for Expensive Calculations
+// EXAMPLE 4: Expensive Calculations On Every Render
+// Problem: Expensive calculation runs on every render
+// Solution: Used useMemo to cache the calculation result
 // ======================================================
-const OptimizedCalculationComponent = () => {
-  const [count, setCount] = useState(0);
-
-  // Use useMemo to only recalculate when count changes
-  const expensiveResult = useMemo(() => {
-    return calculateExpensiveValue(count);
-  }, [count]);
-
-  return (
-    <div>
-      <h2>Solution 4: Memoized Calculations</h2>
-      <p>Result: {expensiveResult}</p>
-      <button onClick={() => setCount(count + 1)}>Increment: {count}</button>
-    </div>
-  );
-};
-
 function calculateExpensiveValue(input) {
-  console.log("Running expensive calculation...");
-  // Simulate expensive calculation
   let result = 0;
   for (let i = 0; i < 1000000; i++) {
     result += Math.random() * input;
@@ -189,91 +288,130 @@ function calculateExpensiveValue(input) {
   return result.toFixed(2);
 }
 
+const ExpensiveCalculationComponent = () => {
+  const [count, setCount] = useState(0);
+  const [logs, setLogs] = useState([]);
+
+  // Memoized expensive calculation
+  const expensiveResult = useMemo(
+    () => calculateExpensiveValue(count),
+    [count]
+  );
+
+  const handleCountUpdate = useCallback(() => {
+    setCount((prev) => prev + 1);
+    setLogs((prev) => [
+      ...prev,
+      {
+        time: new Date().toLocaleTimeString(),
+        message: "Count updated - Expensive calculation triggered",
+      },
+    ]);
+  }, []);
+
+  return (
+    <div className="solution-container">
+      <div className="solution-content">
+        <h2 className="solution-title">Problem 4: Expensive Calculations</h2>
+        <div className="counter-container">
+          <p className="result-text">Calculation Result: {expensiveResult}</p>
+          <p className="count-text">Count: {count}</p>
+          <button className="action-button" onClick={handleCountUpdate}>
+            Trigger Expensive Calculation
+          </button>
+        </div>
+      </div>
+      <Logger logs={logs} />
+    </div>
+  );
+};
+
 // ======================================================
-// SOLUTION 5: Proper Effect Dependencies and State Updates
+// EXAMPLE 5: Effect Dependencies Causing Render Loops
+// Problem: Effect causes infinite loop due to state updates
+// Solution:
+// 1. Used useRef to track previous count
+// 2. Only update data when count actually changes
+// 3. Memoized callback functions
 // ======================================================
-const OptimizedEffectComponent = () => {
+const EffectLoopComponent = () => {
   const [count, setCount] = useState(0);
   const [data, setData] = useState([]);
+  const [logs, setLogs] = useState([]);
+  const prevCountRef = useRef(count);
 
-  console.log(data, "data");
-
-  // Use useCallback to memoize the function
-  const fetchData = useCallback(() => {
-    console.log("Fetching data...");
-    // Use functional updates to avoid dependency on data
-    setData((prevData) => [...prevData, count]);
-  }, [count]); // Only recreate when count changes
-
-  // Now our effect dependencies are correct
   useEffect(() => {
-    fetchData();
-    // This effect only runs when fetchData changes (which only changes when count changes)
-  }, [fetchData]);
+    if (prevCountRef.current !== count) {
+      setData((prevData) => [...prevData, count]);
+      setLogs((prev) => [
+        ...prev,
+        {
+          time: new Date().toLocaleTimeString(),
+          message: `Effect triggered - Data updated with count: ${count}`,
+        },
+      ]);
+      prevCountRef.current = count;
+    }
+  }, [count]);
+
+  const handleCountUpdate = useCallback(() => {
+    setCount((prev) => prev + 1);
+    setLogs((prev) => [
+      ...prev,
+      {
+        time: new Date().toLocaleTimeString(),
+        message: "Count updated - Effect will trigger",
+      },
+    ]);
+  }, []);
 
   return (
-    <div>
-      <h2>Solution 5: Proper Effect Dependencies</h2>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-      <p>Data length: {data.length}</p>
+    <div className="solution-container">
+      <div className="solution-content">
+        <h2 className="solution-title">Problem 5: Effect Dependencies</h2>
+        <div className="counter-container">
+          <p className="count-text">Count: {count}</p>
+          <button className="action-button" onClick={handleCountUpdate}>
+            Increment Count
+          </button>
+          <div className="data-display">
+            <p className="data-length">Data Array Length: {data.length}</p>
+          </div>
+        </div>
+      </div>
+      <Logger logs={logs} />
     </div>
   );
 };
 
 // ======================================================
-// BONUS SOLUTION: React.lazy for Code-splitting
-// ======================================================
-const LazyLoadingExample = () => {
-  const [showComponent, setShowComponent] = useState(false);
-
-  // React.lazy for code-splitting
-  const LazyComponent = React.lazy(
-    () =>
-      // In a real app, this would be an import statement
-      new Promise((resolve) => {
-        setTimeout(() => {
-          resolve({
-            default: () => <div>This component was lazily loaded!</div>,
-          });
-        }, 1000);
-      })
-  );
-
-  return (
-    <div>
-      <h2>Bonus: Code Splitting with React.lazy</h2>
-      <button onClick={() => setShowComponent(!showComponent)}>
-        {showComponent ? "Hide" : "Show"} Component
-      </button>
-
-      {showComponent && (
-        <React.Suspense fallback={<div>Loading...</div>}>
-          <LazyComponent />
-        </React.Suspense>
-      )}
-    </div>
-  );
-};
-
-// ======================================================
-// App Component: Combines all solutions
+// App Component: Combines all examples with tabs
 // ======================================================
 const App = () => {
+  const [activeTab, setActiveTab] = useState("prop-changes");
+
+  const renderActiveComponent = useCallback(() => {
+    switch (activeTab) {
+      case "prop-changes":
+        return <ParentWithPropProblem />;
+      case "state-updates":
+        return <ParentWithStateUpdates />;
+      case "context":
+        return <ContextExample />;
+      case "expensive":
+        return <ExpensiveCalculationComponent />;
+      case "effects":
+        return <EffectLoopComponent />;
+      default:
+        return <ParentWithPropProblem />;
+    }
+  }, [activeTab]);
+
   return (
-    <div>
-      <h1>React Re-rendering Solutions</h1>
-      {/* <ParentWithPropSolution />
-      <hr />
-      <ParentWithComponentComposition />
-      <hr />
-      <OptimizedContextExample />
-      <hr />
-      <OptimizedCalculationComponent /> */}
-      <hr />
-      <OptimizedEffectComponent />
-      <hr />
-      {/* <LazyLoadingExample /> */}
+    <div className="app-container">
+      <h1 className="main-title">React Re-rendering Solutions</h1>
+      <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
+      <div className="tab-content">{renderActiveComponent()}</div>
     </div>
   );
 };

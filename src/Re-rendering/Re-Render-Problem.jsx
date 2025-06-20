@@ -1,58 +1,145 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+  useRef,
+} from "react";
+import "./Re-Render-Problem.css";
+
+// Tab Navigation Component
+const TabNavigation = ({ activeTab, onTabChange }) => {
+  const tabs = [
+    { id: "prop-changes", label: "Prop Changes" },
+    { id: "state-updates", label: "State Updates" },
+    { id: "context", label: "Context" },
+    { id: "expensive", label: "Expensive Calc" },
+    { id: "effects", label: "Effects" },
+  ];
+
+  return (
+    <div className="tab-navigation">
+      {tabs.map((tab) => (
+        <button
+          key={tab.id}
+          className={`tab-button ${activeTab === tab.id ? "active" : ""}`}
+          onClick={() => onTabChange(tab.id)}
+        >
+          {tab.label}
+        </button>
+      ))}
+    </div>
+  );
+};
+
+// Logger Component
+const Logger = ({ logs }) => {
+  return (
+    <div className="log-container">
+      <h3 className="log-title">Render & State Changes</h3>
+      <div className="log-content">
+        {logs.map((log, index) => (
+          <div key={index} className="log-entry">
+            <span className="log-time">{log.time}</span>
+            <span className="log-message">{log.message}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 // ======================================================
 // EXAMPLE 1: Prop Changes Causing Excessive Rerenders
 // ======================================================
 const ParentWithPropProblem = () => {
   const [count, setCount] = useState(0);
+  const [renderCount, setRenderCount] = useState(0);
+  const [logs, setLogs] = useState([]);
 
-  // This creates a new object on EVERY render
-  const userInfo = { name: "John", id: 123 };
-
-  const userInfo__ = useMemo(() => {
+  //creates new object everytime child is renderred
+  const userInfo__ = { name: "John", id: 123 };
+  const userInfo = useMemo(() => {
     return { name: "Jhone" };
   }, []);
-
-  // This creates a new function on EVERY render
-  const handleClick = () => {
-    console.log("Button clicked");
-  };
-
-  const handleClick__ = useCallback(() => {
-    console.log("CLiek");
-  }, []);
-
-  return (
-    <div>
-      <h2>Problem 1: New Props on Every Render</h2>
-      <button onClick={() => setCount(count + 1)}>
-        Parent render count: {count}
-      </button>
-
-      {/* Both userInfo and handleClick are recreated every render */}
-      <ChildComponent userInfo={userInfo} onButtonClick={handleClick} />
-    </div>
-  );
-};
-
-// This will rerender whenever ParentWithPropProblem rerenders
-const ChildComponent = ({ userInfo, onButtonClick }) => {
-  console.log("ChildComponent rendered");
+  const prevUserInfoRef = useRef(userInfo);
 
   useEffect(() => {
-    console.log("userInfo prop changed:", userInfo);
-  }, [userInfo]); // Logs when userInfo changes
+    if (prevUserInfoRef.current !== userInfo) {
+      console.log("❗userInfo was recreated!");
+    } else {
+      console.log("✅userInfo reference is the same");
+    }
+    prevUserInfoRef.current = userInfo;
+  }, [userInfo]);
+
+  //creates new function everytime child is renderred
+  const handleClick__ = () => {
+    setRenderCount((prev) => prev + 1);
+    setLogs((prev) => [
+      ...prev,
+      {
+        time: new Date().toLocaleTimeString(),
+        message: "Child component rendered due to prop change",
+      },
+    ]);
+  };
+
+  const handleClick = useCallback(() => {
+    setRenderCount((prev) => prev + 1);
+    setLogs((prev) => [
+      ...prev,
+      {
+        time: new Date().toLocaleTimeString(),
+        message: "Child component rendered due to callback",
+      },
+    ]);
+  }, []);
+
+  const prevHandleClickRef = useRef(handleClick);
+
+  useEffect(() => {
+    if (prevHandleClickRef.current !== handleClick) {
+      console.log("❗handleClick was recreated!");
+    } else {
+      console.log("✅handleClick reference is the same");
+    }
+    prevHandleClickRef.current = handleClick;
+  }, [handleClick]);
 
   return (
-    <div>
-      <p>User: {userInfo.name}</p>
-      <button onClick={onButtonClick}>Click me</button>
+    <div className="solution-container">
+      <div className="solution-content">
+        <h2 className="solution-title">Problem 1: New Props on Every Render</h2>
+        <div className="counter-container">
+          <p className="count-text">Parent render count: {count}</p>
+          <button className="action-button" onClick={() => setCount(count + 1)}>
+            Update Parent Count
+          </button>
+        </div>
+        <ChildComponent
+          userInfo={userInfo}
+          onButtonClick={handleClick}
+          renderCount={renderCount}
+        />
+      </div>
+      <Logger logs={logs} />
     </div>
   );
 };
 
-// export default React.memo(ChildComponent)
+const ChildComponent = ({ userInfo, onButtonClick, renderCount }) => {
+  return (
+    <div className="child-container">
+      <p>User: {userInfo.name}</p>
+      <p>Child Render Count: {renderCount}</p>
+      <button className="action-button" onClick={onButtonClick}>
+        Trigger Child Render
+      </button>
+    </div>
+  );
+};
 
 // ======================================================
 // EXAMPLE 2: State Updates in Parent Cause Child Rerenders
@@ -60,26 +147,54 @@ const ChildComponent = ({ userInfo, onButtonClick }) => {
 const ParentWithStateUpdates = () => {
   const [count, setCount] = useState(0);
   const [unrelatedState, setUnrelatedState] = useState(0);
+  const [logs, setLogs] = useState([]);
+
+  const handleUnrelatedUpdate = () => {
+    setUnrelatedState((prev) => prev + 1);
+    setLogs((prev) => [
+      ...prev,
+      {
+        time: new Date().toLocaleTimeString(),
+        message: "Unrelated state updated - Child will re-render",
+      },
+    ]);
+  };
+
+  const handleCountUpdate = () => {
+    setCount((prev) => prev + 1);
+    setLogs((prev) => [
+      ...prev,
+      {
+        time: new Date().toLocaleTimeString(),
+        message: "Count updated - Child will re-render",
+      },
+    ]);
+  };
 
   return (
-    <div>
-      <h2>Problem 2: Unrelated State Updates</h2>
-      <button onClick={() => setUnrelatedState(unrelatedState + 1)}>
-        Update unrelated state: {unrelatedState}
-      </button>
-
-      {/* ChildCounter rerenders even when only unrelatedState changes */}
-      <ChildCounter count={count} onIncrement={() => setCount(count + 1)} />
+    <div className="solution-container">
+      <div className="solution-content">
+        <h2 className="solution-title">Problem 2: Unrelated State Updates</h2>
+        <div className="counter-container">
+          <p className="count-text">Unrelated State: {unrelatedState}</p>
+          <button className="action-button" onClick={handleUnrelatedUpdate}>
+            Update Unrelated State
+          </button>
+        </div>
+        <ChildCounter count={count} onIncrement={handleCountUpdate} />
+      </div>
+      <Logger logs={logs} />
     </div>
   );
 };
 
 const ChildCounter = React.memo(({ count, onIncrement }) => {
-  console.log("ChildCounter rendered");
   return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={onIncrement}>Increment</button>
+    <div className="child-container">
+      <p className="count-text">Count: {count}</p>
+      <button className="action-button" onClick={onIncrement}>
+        Increment Count
+      </button>
     </div>
   );
 });
@@ -92,74 +207,117 @@ const ThemeContext = React.createContext();
 const ContextExample = () => {
   const [theme, setTheme] = useState("light");
   const [count, setCount] = useState(0);
+  const [logs, setLogs] = useState([]);
 
-  // Theme value recreated on every render
   const themeValue = {
     theme,
-    toggleTheme: () => setTheme(theme === "light" ? "dark" : "light"),
+    toggleTheme: () => {
+      setTheme((prev) => (prev === "light" ? "dark" : "light"));
+      setLogs((prev) => [
+        ...prev,
+        {
+          time: new Date().toLocaleTimeString(),
+          message: "Theme changed - Components will re-render",
+        },
+      ]);
+    },
+  };
+
+  const handleCountUpdate = () => {
+    setCount((prev) => prev + 1);
+    setLogs((prev) => [
+      ...prev,
+      {
+        time: new Date().toLocaleTimeString(),
+        message: "Count updated - Components will re-render",
+      },
+    ]);
   };
 
   return (
     <ThemeContext.Provider value={themeValue}>
-      <h2>Problem 3: Context Rerenders</h2>
-      <button onClick={() => setCount(count + 1)}>Update count: {count}</button>
-      <ThemedComponent />
-      <CountDisplay />
+      <div className="solution-container">
+        <div className="solution-content">
+          <h2 className="solution-title">Problem 3: Context Rerenders</h2>
+          <div className="counter-container">
+            <p className="count-text">Count: {count}</p>
+            <button className="action-button" onClick={handleCountUpdate}>
+              Update Count
+            </button>
+          </div>
+          <ThemedComponent />
+          <CountDisplay />
+        </div>
+        <Logger logs={logs} />
+      </div>
     </ThemeContext.Provider>
   );
 };
 
-// Will rerender when ThemeContext changes OR when parent rerenders
 const ThemedComponent = () => {
   const { theme, toggleTheme } = React.useContext(ThemeContext);
-  console.log("ThemedComponent rendered");
 
   return (
-    <div
-      style={{
-        background: theme === "light" ? "#fff" : "#333",
-        color: theme === "light" ? "#000" : "#fff",
-      }}
-    >
+    <div className={`themed-container ${theme}`}>
       <p>Current theme: {theme}</p>
-      <button onClick={toggleTheme}>Toggle Theme</button>
+      <button className="action-button" onClick={toggleTheme}>
+        Toggle Theme
+      </button>
     </div>
   );
 };
 
-// Will rerender when parent rerenders, even though it doesn't use the count
 const CountDisplay = () => {
-  console.log("CountDisplay rendered (unnecessarily)");
-  return <div>This component doesn't use count but still rerenders</div>;
+  return (
+    <div className="count-container">
+      <p>This component doesn't use count but still rerenders</p>
+    </div>
+  );
 };
 
 // ======================================================
 // EXAMPLE 4: Expensive Calculations On Every Render
 // ======================================================
-const ExpensiveCalculationComponent = () => {
-  const [count, setCount] = useState(0);
-
-  // This expensive calculation runs on EVERY render
-  const expensiveResult = calculateExpensiveValue(count);
-
-  return (
-    <div>
-      <h2>Problem 4: Expensive Calculations</h2>
-      <p>Result: {expensiveResult}</p>
-      <button onClick={() => setCount(count + 1)}>Increment: {count}</button>
-    </div>
-  );
-};
 
 function calculateExpensiveValue(input) {
-  console.log("Running expensive calculation...");
-  // Simulate expensive calculation
   let result = 0;
   for (let i = 0; i < 1000000; i++) {
     result += Math.random() * input;
   }
   return result.toFixed(2);
 }
+const ExpensiveCalculationComponent = () => {
+  const [count, setCount] = useState(0);
+  const [logs, setLogs] = useState([]);
+  const expensiveResult = calculateExpensiveValue(count);
+
+  const handleCountUpdate = () => {
+    setCount((prev) => prev + 1);
+    setLogs((prev) => [
+      ...prev,
+      {
+        time: new Date().toLocaleTimeString(),
+        message: "Count updated - Expensive calculation triggered",
+      },
+    ]);
+  };
+
+  return (
+    <div className="solution-container">
+      <div className="solution-content">
+        <h2 className="solution-title">Problem 4: Expensive Calculations</h2>
+        <div className="counter-container">
+          <p className="result-text">Calculation Result: {expensiveResult}</p>
+          <p className="count-text">Count: {count}</p>
+          <button className="action-button" onClick={handleCountUpdate}>
+            Trigger Expensive Calculation
+          </button>
+        </div>
+      </div>
+      <Logger logs={logs} />
+    </div>
+  );
+};
 
 // ======================================================
 // EXAMPLE 5: Effect Dependencies Causing Render Loops
@@ -167,52 +325,77 @@ function calculateExpensiveValue(input) {
 const EffectLoopComponent = () => {
   const [count, setCount] = useState(0);
   const [data, setData] = useState([]);
-
-  // Missing or incorrect dependencies
-  useEffect(() => {
-    // This effect runs on every render because the fetchData
-    // function is recreated each time
-    fetchData();
-  }, []);
+  const [logs, setLogs] = useState([]);
 
   useEffect(() => {
-    console.log("Fetching data...");
-    setData((prevData) => [...prevData, count]); // Using functional update to get fresh state
-  }, [count]); // Dependency on count
+    setData((prevData) => [...prevData, count]);
+    setLogs((prev) => [
+      ...prev,
+      {
+        time: new Date().toLocaleTimeString(),
+        message: `Effect triggered - Data updated with count: ${count}`,
+      },
+    ]);
+  }, [count]);
 
-  // This function is recreated on every render
-  const fetchData = () => {
-    console.log("Fetching data...");
-    // This would trigger another render
-    setData([...data, count]);
+  const handleCountUpdate = () => {
+    setCount((prev) => prev + 1);
+    setLogs((prev) => [
+      ...prev,
+      {
+        time: new Date().toLocaleTimeString(),
+        message: "Count updated - Effect will trigger",
+      },
+    ]);
   };
 
   return (
-    <div>
-      <h2>Problem 5: Effect Dependencies</h2>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-      <p>Data length: {data.length}</p>
+    <div className="solution-container">
+      <div className="solution-content">
+        <h2 className="solution-title">Problem 5: Effect Dependencies</h2>
+        <div className="counter-container">
+          <p className="count-text">Count: {count}</p>
+          <button className="action-button" onClick={handleCountUpdate}>
+            Increment Count
+          </button>
+          <div className="data-display">
+            <p className="data-length">Data Array Length: {data.length}</p>
+          </div>
+        </div>
+      </div>
+      <Logger logs={logs} />
     </div>
   );
 };
 
 // ======================================================
-// App Component: Combines all examples
+// App Component: Combines all examples with tabs
 // ======================================================
 const App = () => {
+  const [activeTab, setActiveTab] = useState("prop-changes");
+
+  const renderActiveComponent = () => {
+    switch (activeTab) {
+      case "prop-changes":
+        return <ParentWithPropProblem />;
+      case "state-updates":
+        return <ParentWithStateUpdates />;
+      case "context":
+        return <ContextExample />;
+      case "expensive":
+        return <ExpensiveCalculationComponent />;
+      case "effects":
+        return <EffectLoopComponent />;
+      default:
+        return <ParentWithPropProblem />;
+    }
+  };
+
   return (
-    <div>
-      <h1>React Re-rendering Problems</h1>
-      {/* <ParentWithPropProblem /> */}
-      <hr />
-      {/* <ParentWithStateUpdates /> */}
-      <hr />
-      {/* <ContextExample /> */}
-      <hr />
-      {/* <ExpensiveCalculationComponent /> */}
-      <hr />
-      <EffectLoopComponent />
+    <div className="app-container">
+      <h1 className="main-title">React Re-rendering Problems</h1>
+      <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
+      <div className="tab-content">{renderActiveComponent()}</div>
     </div>
   );
 };

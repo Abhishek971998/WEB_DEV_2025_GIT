@@ -41,24 +41,35 @@ const App = () => {
 
 export default App;
 
-const MyContext_ = createContext();
+// // Create MULTIPLE contexts
+// const ThemeContext = createContext();
+// const UserContext = createContext();
 
-const MyProvider_ = ({ children }) => {
-  const [user, setUser] = useState("John Doe");
-  return (
-    <MyContext.Provider value={{ user, setUser }}>
-      <div>{children}</div>
-    </MyContext.Provider>
-  );
-};
+// // Theme Provider
+// const ThemeProvider = ({ children }) => {
+//   const [theme, setTheme] = useState("dark");
+//   return (
+//     <ThemeContext.Provider value={{ theme, setTheme }}>
+//       {children}
+//     </ThemeContext.Provider>
+//   );
+// };
 
-function UserComponent_(params) {
-  // const {user, setUser} = useContext(MyContext);
+// // User Provider
+// const UserProvider = ({ children }) => {
+//   const [user, setUser] = useState("Guest");
+//   return (
+//     <UserContext.Provider value={{ user, setUser }}>
+//       {children}
+//     </UserContext.Provider>
+//   );
+// };
 
-  return <button></button>;
-}
-function App_() {
-  <MyProvider_>
-    <UserComponent />
-  </MyProvider_>;
-}
+// // Combined Provider
+// export const AppProvider = ({ children }) => {
+//   return (
+//     <ThemeProvider>
+//       <UserProvider>{children}</UserProvider>
+//     </ThemeProvider>
+//   );
+// };

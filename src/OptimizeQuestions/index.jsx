@@ -194,7 +194,7 @@ const FrontendFAQ = () => {
         {
           question: "What is React.memo, and when should you use it?",
           answer:
-            "`React.memo` prevents re-renders if props don’t change, useful for pure components.",
+            "`React.memo` prevents re-renders if props don't change, useful for pure components.",
         },
         {
           question: "What are React portals, and when should you use them?",
@@ -408,33 +408,53 @@ const FrontendFAQ = () => {
   ];
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-      <h1>Frontend Interview Questions & Answers</h1>
-      {faqData.map((section, index) => (
-        <div key={index} style={{ marginBottom: "20px" }}>
-          <h2
-            onClick={() => toggleCategory(section.category)}
-            style={{ cursor: "pointer", color: "#007BFF" }}
-          >
-            {section.category}{" "}
-            {expandedCategory === section.category ? "▼" : "▶"}
-          </h2>
-          {expandedCategory === section.category && (
-            <ul style={{ listStyleType: "none", paddingLeft: "0" }}>
-              {section.questions.map((item, idx) => (
-                <li key={idx} style={{ marginBottom: "15px" }}>
-                  <div>
-                    <div>
-                      <strong>{item.question}</strong>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-8">
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-4xl font-bold mb-12 text-center">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
+            Frontend Interview Questions & Answers
+          </span>
+        </h1>
+
+        <div className="space-y-6">
+          {faqData.map((section, index) => (
+            <div
+              key={index}
+              className="bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50 overflow-hidden transition-all duration-300 hover:shadow-lg"
+            >
+              <button
+                onClick={() => toggleCategory(section.category)}
+                className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-700/30 transition-colors"
+              >
+                <h2 className="text-xl font-semibold text-blue-400">
+                  {section.category}
+                </h2>
+                <span className="text-gray-400 transform transition-transform duration-300">
+                  {expandedCategory === section.category ? "▼" : "▶"}
+                </span>
+              </button>
+
+              {expandedCategory === section.category && (
+                <div className="px-6 py-4 space-y-6">
+                  {section.questions.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-gray-900/50 rounded-lg p-4 hover:bg-gray-900/70 transition-colors"
+                    >
+                      <h3 className="text-lg font-medium text-blue-300 mb-2">
+                        {item.question}
+                      </h3>
+                      <p className="text-gray-300 leading-relaxed">
+                        {item.answer}
+                      </p>
                     </div>
-                    <div>{item.answer}</div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 };

@@ -67,12 +67,7 @@ const questions = {
       answer: "Functions passed as arguments to other functions.",
       liner: "Callback = function in a function.",
     },
-    {
-      question: "null vs undefined:",
-      answer:
-        "null is an assignment value; undefined means a variable has been declared but not assigned.",
-      liner: "undefined is uninitialized; null is intentional.",
-    },
+
     {
       question: "NaN:",
       answer:
@@ -135,12 +130,7 @@ const questions = {
         "Promises are objects representing the eventual completion or failure of an asynchronous operation. They have three states: pending, fulfilled, and rejected. They help avoid callback hell and provide better error handling.",
       liner: "Promises handle async operations elegantly.",
     },
-    {
-      question: "Async/Await vs Promises:",
-      answer:
-        "Async/await is syntactic sugar over Promises that makes asynchronous code look synchronous. It uses Promises under the hood but provides a more readable and maintainable way to write async code.",
-      liner: "Async/await = cleaner Promise syntax.",
-    },
+
     {
       question: "Event bubbling and capturing:",
       answer:
@@ -153,12 +143,7 @@ const questions = {
         "TDZ is the period between entering scope and variable declaration where the variable exists but cannot be accessed. It occurs with let and const declarations, preventing access before initialization.",
       liner: "TDZ prevents accessing let/const before declaration.",
     },
-    {
-      question: "== vs ===:",
-      answer:
-        "== performs type coercion before comparison, while === (strict equality) checks both value and type without coercion. Always use === to avoid unexpected type conversions.",
-      liner: "=== checks type and value, == coerces types.",
-    },
+
     {
       question: "null vs undefined:",
       answer:
@@ -298,6 +283,34 @@ const questions = {
         "Array.from() creates an array from array-like or iterable objects. Array.of() creates an array from its arguments. from is more flexible, of is simpler for fixed values.",
       liner: "from = iterable, of = arguments.",
     },
+    {
+      question: "Pure functions vs Impure functions:",
+      answer:
+        "Pure functions always return the same output for the same inputs and have no side effects. Impure functions may depend on external state or cause side effects.",
+      liner:
+        "pure = no side effects, same output; impure = side effects, varying output.",
+    },
+
+    {
+      question: "Generator functions:",
+      answer:
+        "Generator functions can pause execution and yield multiple values over time using the `function*` syntax and `yield` keyword.",
+      liner: "generator = pause/resume, produces sequence of values.",
+    },
+
+    {
+      question: "Primitive vs Non-primitive types:",
+      answer:
+        "Primitive types include string, number, boolean, null, undefined, symbol, bigint — they hold single values. Non-primitive types (objects, arrays, functions) hold references.",
+      liner: "primitive = value, non-primitive = reference.",
+    },
+
+    {
+      question: "Mutable vs Immutable in JS:",
+      answer:
+        "Mutable objects can be changed after creation (arrays, objects). Immutable values cannot be changed (primitives like strings, numbers).",
+      liner: "mutable = changeable, immutable = fixed.",
+    },
   ],
   React: [
     {
@@ -335,6 +348,7 @@ const questions = {
       answer: "Lightweight in-memory representation of the real DOM.",
       liner: "Virtual DOM boosts performance.",
     },
+
     {
       question: "JSX:",
       answer:
@@ -458,6 +472,12 @@ const questions = {
       liner: "useReducer = complex state, useState = simple state.",
     },
     {
+      question: "Redux:",
+      answer:
+        "Redux is a predictable state container for JavaScript apps, managing state with actions, reducers, and a single immutable store.",
+      liner: "Redux = centralized state with actions & reducers.",
+    },
+    {
       question: "React Context:",
       answer:
         "Provides a way to pass data through the component tree without prop drilling. It's useful for global state like themes, user authentication, or language preferences. useContext hook is used to consume context.",
@@ -517,12 +537,7 @@ const questions = {
         "useCallback memoizes functions, useMemo memoizes values. Both prevent unnecessary re-renders. Use useCallback for functions passed as props, useMemo for expensive calculations.",
       liner: "useCallback = function, useMemo = value.",
     },
-    {
-      question: "React.forwardRef vs useImperativeHandle:",
-      answer:
-        "forwardRef passes refs to child components. useImperativeHandle customizes the ref value exposed to parent components. They're often used together for controlled ref exposure.",
-      liner: "forwardRef = pass, useImperativeHandle = customize.",
-    },
+
     {
       question: "React.lazy vs React.Suspense:",
       answer:
@@ -600,6 +615,72 @@ const questions = {
       answer:
         "forwardRef passes refs to child components. useImperativeHandle customizes the ref value exposed to parent components. They're often used together for controlled ref exposure.",
       liner: "forwardRef = pass, useImperativeHandle = customize.",
+    },
+    {
+      question: "useSelector:",
+      answer:
+        "A React-Redux hook that extracts data from the Redux store state. It subscribes the component to store updates.",
+      liner: "useSelector = select state from Redux store.",
+    },
+
+    {
+      question: "Dispatch:",
+      answer:
+        "A Redux method to send actions to the store, triggering state changes via reducers.",
+      liner: "dispatch = send action to Redux store.",
+    },
+
+    {
+      question: "useReducer:",
+      answer:
+        "A React hook for managing complex state logic with a reducer function and dispatching actions, similar to Redux but local to a component.",
+      liner: "useReducer = local Redux-like state management.",
+    },
+
+    {
+      question: "Redux-Saga:",
+      answer:
+        "A middleware library to handle side effects in Redux apps using generator functions for more manageable async flows.",
+      liner: "Saga = manage async Redux side effects with generators.",
+    },
+
+    {
+      question: "takeEvery vs takeLatest in Redux-Saga:",
+      answer:
+        "`takeEvery` runs a saga on every matching action, while `takeLatest` cancels previous saga if a new matching action comes before completion.",
+      liner: "takeEvery = all actions; takeLatest = only last action.",
+    },
+
+    {
+      question: "call effect in Redux-Saga:",
+      answer:
+        "Used to call a function (usually async) and yield its result inside a saga generator.",
+      liner: "call = invoke function in saga.",
+    },
+
+    {
+      question: "put effect in Redux-Saga:",
+      answer: "Dispatches an action to the Redux store from within a saga.",
+      liner: "put = dispatch action from saga.",
+    },
+
+    {
+      question: "select effect in Redux-Saga:",
+      answer: "Accesses the current Redux state from within a saga.",
+      liner: "select = read Redux state in saga.",
+    },
+
+    {
+      question: "fork effect in Redux-Saga:",
+      answer: "Starts a non-blocking saga task in the background.",
+      liner: "fork = start saga without blocking.",
+    },
+
+    {
+      question: "yield in generator functions:",
+      answer:
+        "Pauses the generator function and returns a value to the caller; can also receive input when resumed.",
+      liner: "yield = pause/resume generator with value.",
     },
   ],
 };
