@@ -372,4 +372,6 @@ type OmitUser = Omit<User, "id" | "createdAt">;`,
   );
 };
 
+// part 2
+
 export default TypeScriptExample;

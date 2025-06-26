@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./style.scss"; // Include CSS in the same file
+import AdvanceTodo from "./advanceTodo";
 
 function TodoApp() {
   const [todoList, setTodoList] = useState([]);
@@ -76,6 +77,10 @@ function TodoApp() {
           </li>
         ))}
       </ul>
+      <div>
+        Advance
+        <AdvanceTodo />
+      </div>
     </div>
   );
 }

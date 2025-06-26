@@ -53,6 +53,8 @@ const counterReducer = (state = initialState, action) => {
       return { count: state.count + 1 };
     case DECREMENT:
       return { count: state.count - 1 };
+    case "POSTS_LOADED":
+      return { ...state, posts: action.payload };
     default:
       return state;
   }
@@ -67,7 +69,23 @@ export const store = createStore(counterReducer);
 // 4. Counter Component
 const Counter = () => {
   const count = useSelector((state) => state.count);
+  const posts = useSelector((state) => state.posts);
   const dispatch = useDispatch();
+
+  // Fetch posts on mount
+  React.useEffect(() => {
+    async function fetchPosts() {
+      try {
+        const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+        const data = await res.json();
+        dispatch({ type: "POSTS_LOADED", payload: data });
+      } catch (err) {
+        console.error("Failed to fetch posts:", err);
+      }
+    }
+
+    fetchPosts();
+  }, [dispatch]);
 
   return (
     <div style={{ maxWidth: "800px", margin: "0 auto", padding: "20px" }}>
@@ -210,6 +228,20 @@ const decrementAction = () => ({
             return action objects. They help maintain consistency in action
             creation and make the code more maintainable.
           </p>
+        </div>
+        <div>
+          <h2>Posts</h2>
+          {posts.length === 0 ? (
+            <p>Loading...</p>
+          ) : (
+            <ul>
+              {posts.slice(0, 5).map((post) => (
+                <li key={post.id}>
+                  <strong>{post.title}</strong>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </div>

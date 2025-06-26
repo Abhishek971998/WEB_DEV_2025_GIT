@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+// /* eslint-disable no-unused-vars */
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import StringProblems from "./StringInterviewProblem";
 import ArrayMethods from "./ArrayMethods";
@@ -18,10 +20,11 @@ import { Navigation } from "./components/Navigation";
 import EventLoopFlashcard from "./EventLoop";
 import MostAskedTheory from "./MostAskedTheory";
 import React19 from "./React19";
-import TypeScriptExample from "./components/TypeScriptExample";
+import TypeScriptExample from "./Typescript/index_";
 import ReduxSaga from "./ReduxSaga/ReduxSaga";
 import AdvanceJS from "./JSadvance";
 import ReactHooksQnA from "./Hooks/HooksQNA";
+import Pagination from "./Pagination";
 
 import Redux from "./Redux/AllinOne";
 
@@ -98,6 +101,11 @@ const routes = [
     element: <ReactHooksQnA />,
     label: "  Hooks QnA",
   },
+  {
+    path: "/pagination",
+    element: <Pagination />,
+    label: "Pagination",
+  },
 ];
 
 function App() {
@@ -136,3 +144,14 @@ function App() {
 }
 
 export default App;
+
+// import React, { useState } from "react";
+
+// const App = () => {
+//   return (
+//     <>
+//       <h2>Hello world</h2>
+//     </>
+//   );
+// };
+// export default App;

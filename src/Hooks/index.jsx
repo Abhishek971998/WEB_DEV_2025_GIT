@@ -66,6 +66,67 @@ const App = () => {
     );
   };
 
+  // forwardRef
+  const CustomInput = React.forwardRef((props, ref) => {
+    return <input type="text" ref={ref} />;
+  });
+
+  function App() {
+    const inputRef = React.useRef();
+
+    const focusInput = () => {
+      inputRef.current.focus(); // 🎯 focus the input!
+    };
+
+    return (
+      <div>
+        <CustomInput ref={inputRef} />
+        <button onClick={focusInput}>Focus the input</button>
+      </div>
+    );
+  }
+
+  // import { useReducer } from "react";
+
+  const initialState = {
+    name: "",
+    email: "",
+    darkMode: false,
+  };
+
+  function reducer_(state, action) {
+    switch (action.type) {
+      case "UPDATE_FIELD":
+        return { ...state, [action.field]: action.value };
+      case "TOGGLE_DARK_MODE":
+        return { ...state, darkMode: !state.darkMode };
+      default:
+        return state;
+    }
+  }
+
+  function UserProfile() {
+    const [state, dispatch] = useReducer(reducer_, initialState);
+
+    const handleChange = (e) => {
+      dispatch({
+        type: "UPDATE_FIELD",
+        field: e.target.name,
+        value: e.target.value,
+      });
+    };
+
+    return (
+      <div>
+        <input name="name" value={state.name} onChange={handleChange} />
+        <input name="email" value={state.email} onChange={handleChange} />
+        <button onClick={() => dispatch({ type: "TOGGLE_DARK_MODE" })}>
+          {state.darkMode ? "Light Mode" : "Dark Mode"}
+        </button>
+      </div>
+    );
+  }
+
   return (
     <MyContext.Provider value="Hello from Context!">
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-100 p-8">
