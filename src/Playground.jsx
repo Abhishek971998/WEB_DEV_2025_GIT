@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // 1. Pure Function
 function add(a, b) {
   return a + b; // No side effects, same inputs = same output
@@ -82,3 +83,9 @@ console.log("Memoize:", square(4), square(4)); // 16 from cache
 // 10. Arrow Function
 const sayHi = (name) => `Hi, ${name}`;
 console.log("Arrow:", sayHi("John"));
+
+function App() {
+  return <div>Hello </div>;
+}
+
+export default App;
