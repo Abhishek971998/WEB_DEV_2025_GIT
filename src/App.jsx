@@ -55,7 +55,6 @@ const routes = [
     element: <ThrottleExample />,
     label: "Throttle Example",
   },
-  { path: "/playground", element: <Playground />, label: "Playground" },
   { path: "/debouncing", element: <Debouncing />, label: "Debouncing" },
   { path: "/todo", element: <TodoApp />, label: "Todo App" },
   { path: "/FEFAQ", element: <FrontendFAQ />, label: "FrontendFAQ" },
@@ -106,6 +105,8 @@ const routes = [
     element: <Pagination />,
     label: "Pagination",
   },
+
+  { path: "/playground", element: <Playground />, label: "Playground" },
 ];
 
 function App() {
