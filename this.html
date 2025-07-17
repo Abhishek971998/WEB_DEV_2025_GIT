@@ -6,76 +6,16 @@
   <body>
     <h1>Open Console (F12) to Explore</h1>
     <script>
-      console.log("🌍 Global `this`:", this); // window
+      function arrayStringsAreEqual(word1, word2) {
+        let s1 = word1.join("");
+        let s2 = word2.join("");
 
-      function showThis() {
-        console.log("Regular function:", this);
+        return s1 === s2;
       }
-      showThis(); // window (in non-strict)
+      let work = ["ab", "c"];
+      let arr = [[1, 2], [[1, 3, 5]]];
 
-      const obj = {
-        name: "Abhi",
-        regularMethod() {
-          console.log("Object method:", this.name);
-        },
-        arrowMethod: () => {
-          console.log("Arrow method in object:", this.name); // undefined (lexical)
-        },
-      };
-
-      obj.regularMethod(); // Abhi
-      obj.arrowMethod(); // undefined
-
-      const nested = {
-        name: "NestedObj",
-        greet() {
-          const arrow = () => {
-            console.log("Arrow inside method:", this.name);
-          };
-          arrow(); // Inherits from method -> works
-        },
-      };
-
-      nested.greet(); // NestedObj
-
-      // Constructor
-      function Person(name) {
-        this.name = name;
-      }
-      const p1 = new Person("Abhi");
-      console.log("Constructor this:", p1.name); // Abhi
-
-      // DOM
-      const btn = document.createElement("button");
-      btn.innerText = "Click Me";
-      btn.onclick = function () {
-        console.log("Regular DOM Event:", this); // the button element
-      };
-      document.body.appendChild(btn);
-
-      const btn2 = document.createElement("button");
-      btn2.innerText = "Arrow Click";
-      btn2.onclick = () => {
-        console.log("Arrow DOM Event:", this); // window
-      };
-      document.body.appendChild(btn2);
-
-      // call, apply, bind
-      function sayHello(city) {
-        console.log(`${this.name} says hello from ${city}`);
-      }
-
-      const user = { name: "Abhi" };
-
-      // Using call
-      sayHello.call(user, "Delhi"); // 👉 Abhi says hello from Delhi
-
-      // Using apply
-      sayHello.apply(user, ["Mumbai"]); // 👉 Abhi says hello from Mumbai
-
-      // Using bind
-      const boundSayHello = sayHello.bind(user, "Goa");
-      boundSayHello(); // 👉 Abhi says hello from Goa
+      console.log([arr], "work");
     </script>
   </body>
 </html>

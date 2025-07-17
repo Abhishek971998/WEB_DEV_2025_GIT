@@ -10,7 +10,6 @@ import ReRenderProblem from "./Re-rendering/Re-Render-Problem";
 import ReRenderSolution from "./Re-rendering/Re-Render-Solution";
 import DebounceNew from "./Debouce/index";
 import ThrottleExample from "./Throtling";
-import Playground from "./Playground";
 import Debouncing from "./Debouce";
 import TodoApp from "./Todo";
 import FrontendFAQ from "./OptimizeQuestions";
@@ -27,6 +26,13 @@ import ReactHooksQnA from "./Hooks/HooksQNA";
 import Pagination from "./Pagination";
 
 import Redux from "./Redux/AllinOne";
+
+import Playground from "./Playground";
+import CSS from "./CSS";
+
+import { useEffect } from "react";
+
+import "./App.css";
 
 const routes = [
   {
@@ -50,6 +56,7 @@ const routes = [
     label: "Re-render Solution",
   },
   { path: "/debounce-new", element: <DebounceNew />, label: "Debounce New" },
+
   {
     path: "/throttle-example",
     element: <ThrottleExample />,
@@ -107,6 +114,7 @@ const routes = [
   },
 
   { path: "/playground", element: <Playground />, label: "Playground" },
+  { path: "/css", element: <CSS />, label: "CSS" },
 ];
 
 function App() {
