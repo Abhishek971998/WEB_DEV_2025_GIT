@@ -42,7 +42,7 @@ const decrementAction = () => ({
   description: "Decreases the counter by 1",
 });
 
-// 1. Initial State
+// 1. Initial State //
 const initialState = { count: 0 };
 
 // 2. Reducer Function
