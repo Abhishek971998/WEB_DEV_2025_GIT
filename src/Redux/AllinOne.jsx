@@ -21,6 +21,10 @@ import { Provider, useSelector, useDispatch } from "react-redux";
 
 // Selectors → Functions to retrieve specific parts of the state from the store.
 
+// Always return new state from reducer otherwise  re render wont trigger
+// import from redux  ---- createStore, combineReducer,applyMiddleWIre
+// useDispatch, useSelector, Provider from react-redux
+
 // Advantages of Redux
 // ✅ Centralized state management
 // ✅ Predictable state updates

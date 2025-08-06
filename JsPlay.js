@@ -1,13 +1,27 @@
-// 1. Default Export (export default)
-// Each module can have only one default export.
+let btn = document.getElementById("btn");
+btn.addEventListener("click", () => {});
 
-// It is imported without curly braces {}.
+const obj = useState(0);
 
-// You can name the import anything.
+const { value, setState } = obj;
 
-// 2. Named Export (export)
-// You can have multiple named exports in a module.
+function sum() {
+  let input1 = document.getElementById("input1");
+  let input2 = document.getElementById("input2");
+  const result = Number(input1.value) + Number(input2.value);
+  setState(Math.random());
+}
 
-// Must be imported with curly braces {}.
+function reset() {
+  setState(0);
+}
 
-// The import name must match the export name.
+function useState(value) {
+  function setState(newValue) {
+    let res = document.getElementById("result");
+    res.innerText = newValue;
+
+    return newValue;
+  }
+  return { value, setState };
+}

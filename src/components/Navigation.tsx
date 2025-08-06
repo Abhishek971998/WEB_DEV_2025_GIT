@@ -11,7 +11,7 @@ export const Navigation = () => {
     <nav className="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md">
       <div
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-        style={{ overflow: "scroll", width: "100%" }}
+        style={{ overflow: "auto", width: "100%" }}
       >
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">

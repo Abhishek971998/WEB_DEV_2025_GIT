@@ -103,8 +103,26 @@ function App() {
   };
 
   const otherContext = { name: "New Context" };
+  let obj = {
+    name: "Abhishek",
 
-  return (
+    getName() {
+      setTimeout(() => {
+        console.log(this.name, "from getName"); // ✅ this refers to obj
+      }, 100);
+    },
+
+    greet: () => {
+      setTimeout(() => {
+        console.log(this.name, "from greet"); // ❌ this refers to global (undefined in strict)
+      }, 100);
+    },
+  };
+
+  obj.getName(); // Logs "Abhishek" after 100ms
+  obj.greet(); // Logs undefined or global name after 100ms
+
+  https: return (
     <div className="container">
       <h1>Understanding 'this' keyword</h1>
 
