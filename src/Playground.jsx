@@ -57,6 +57,20 @@ export default function GridLights() {
         <button onClick={resetGrid} data-testid="reset-btn">
           Reset Grid
         </button>
+        <input
+        id="pin"
+        type="number"
+        inputMode="numeric"
+        pattern="[0-9]*"
+        placeholder="1234"
+        style={{
+          fontSize: 24,
+          padding: 10,
+          width: "100%",
+          maxWidth: 300,
+          marginTop: 10,
+        }}
+      />
       </div>
 
       <div className="cinema-hall" data-testid="grid-lights">
