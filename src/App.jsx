@@ -34,6 +34,7 @@ import Redux from "./Redux/AllinOne";
 import Playground from "./Playground";
 import CSS from "./CSS";
 import ReactQuery from "./ReactQuery";
+import AllProjects from "./ReactProjects";
 import "./App.css";
 
 const routes = [
@@ -91,6 +92,7 @@ const routes = [
   { path: "/css", element: <CSS />, label: "CSS" },
   { path: "/ShortNotes", element: <ShortNotes />, label: "Short Notes" },
   { path: "/reactQuery", element: <ReactQuery />, label: "React Query" },
+  { path: "/AllProjects", element: <AllProjects />, label: "React Projects" },
 ];
 
 function App() {
@@ -112,7 +114,7 @@ function App() {
           <button
             type="button"
             className="drawer-toggle"
-            onMouseOver={() => setIsDrawerOpen(true)}
+            onClick={() => setIsDrawerOpen(true)}
             // onMouseOut={() => setIsDrawerOpen(false)}
             // onMouseLeave={toggleDrawer}
             // onClick={toggleDrawer}
