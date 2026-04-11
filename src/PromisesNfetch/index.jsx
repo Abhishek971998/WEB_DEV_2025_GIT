@@ -444,3 +444,52 @@ new Promise((resolve) => {
   .then((result) => console.log("18 Nested result:", result));
 
 console.log("------ Promise Examples End ------");
+
+// **************************************************************/
+// Async await syntactic sugar
+
+// async function fetchProm() {
+//   const res = await getAllData();
+
+//   return res;
+// }
+
+function getAllData() {
+  return Promise.resolve("sdds");
+}
+
+function sameWithPromise() {
+  return getAllData().then((data) => {
+    return data;
+  });
+}
+
+let c = sameWithPromise();
+
+c.then((result) => console.log(result, "CCCC"));
+
+// IN REACT
+
+// import { useEffect, useState } from "react";
+
+// function getAllData() {
+//   return Promise.resolve("sdds");
+// }
+
+// function sameWithPromise() {
+//   return getAllData().then((data) => {
+//     return data;
+//   });
+// }
+
+// export default function App() {
+//   const [data, setData] = useState("Loading...");
+
+//   useEffect(() => {
+//     sameWithPromise().then((result) => {
+//       setData(result);
+//     });
+//   }, []);
+
+//   return <div>{data}</div>;
+// }

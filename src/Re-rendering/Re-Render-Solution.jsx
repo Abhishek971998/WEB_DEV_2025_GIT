@@ -73,7 +73,7 @@ const ChildComponent = React.memo(
         </button>
       </div>
     );
-  }
+  },
 );
 
 const ParentWithPropProblem = () => {
@@ -229,7 +229,7 @@ const ContextExample = () => {
         ]);
       },
     }),
-    [theme]
+    [theme],
   );
 
   // Memoized count context value
@@ -247,7 +247,7 @@ const ContextExample = () => {
         ]);
       },
     }),
-    [count]
+    [count],
   );
 
   return (
@@ -295,7 +295,7 @@ const ExpensiveCalculationComponent = () => {
   // Memoized expensive calculation
   const expensiveResult = useMemo(
     () => calculateExpensiveValue(count),
-    [count]
+    [count],
   );
 
   const handleCountUpdate = useCallback(() => {

@@ -7,8 +7,6 @@ const Pagination = ({ items, itemsPerPage = 5 }) => {
   const totalPages = Math.ceil(items.length / itemsPerPage);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const visibleItems_ = items.slice(startIndex, startIndex + itemsPerPage);
-  let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 11, 12, 13, 14, 15];
   let visibleItems = [...items].splice(startIndex, itemsPerPage);
 
   // console.log(items.splice(startIndex, itemsPerPage), "SPLICE");
@@ -20,6 +18,20 @@ const Pagination = ({ items, itemsPerPage = 5 }) => {
   const goToPage = (pageNum) => {
     setCurrentPage(pageNum);
   };
+
+  // 🔹 slice()
+  // Start index → included
+  // End index → excluded
+  // Does NOT change original array
+  // Returns a shallow copy (new array)
+  // 👉 Think: “slice = cut a piece (no damage)”
+
+  // 🔹 splice()
+  // Start index → included
+  // Second parameter → how many elements to remove (count)
+  // Can also add new items
+  // Changes original array
+  // 👉 Think: “splice = surgery (remove + insert, original changes)”
 
   return (
     <div>

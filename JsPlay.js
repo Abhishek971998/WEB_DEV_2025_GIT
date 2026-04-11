@@ -1,27 +1,11 @@
-let btn = document.getElementById("btn");
-btn.addEventListener("click", () => {});
+let name = "Abhishek Paril";
 
-const obj = useState(0);
-
-const { value, setState } = obj;
-
-function sum() {
-  let input1 = document.getElementById("input1");
-  let input2 = document.getElementById("input2");
-  const result = Number(input1.value) + Number(input2.value);
-  setState(Math.random());
-}
-
-function reset() {
-  setState(0);
-}
-
-function useState(value) {
-  function setState(newValue) {
-    let res = document.getElementById("result");
-    res.innerText = newValue;
-
-    return newValue;
+function printDetails() {
+  let age = 28;
+  function showInfo() {
+    console.log(age);
   }
-  return { value, setState };
+  console.dir(showInfo);
 }
+
+printDetails();

@@ -59,10 +59,10 @@ const ParentWithPropProblem = () => {
   const [logs, setLogs] = useState([]);
 
   //creates new object everytime child is renderred
-  const userInfo__ = { name: "John", id: 123 };
-  const userInfo = useMemo(() => {
-    return { name: "Jhone" };
-  }, []);
+  const userInfo = { name: "John", id: 123 };
+  // const userInfo = useMemo(() => {
+  //   return { name: "Jhone" };
+  // }, []);
   const prevUserInfoRef = useRef(userInfo);
 
   useEffect(() => {
@@ -75,7 +75,7 @@ const ParentWithPropProblem = () => {
   }, [userInfo]);
 
   //creates new function everytime child is renderred
-  const handleClick__ = () => {
+  const handleClick = () => {
     setRenderCount((prev) => prev + 1);
     setLogs((prev) => [
       ...prev,
@@ -86,16 +86,16 @@ const ParentWithPropProblem = () => {
     ]);
   };
 
-  const handleClick = useCallback(() => {
-    setRenderCount((prev) => prev + 1);
-    setLogs((prev) => [
-      ...prev,
-      {
-        time: new Date().toLocaleTimeString(),
-        message: "Child component rendered due to callback",
-      },
-    ]);
-  }, []);
+  // const handleClick = useCallback(() => {
+  //   setRenderCount((prev) => prev + 1);
+  //   setLogs((prev) => [
+  //     ...prev,
+  //     {
+  //       time: new Date().toLocaleTimeString(),
+  //       message: "Child component rendered due to callback",
+  //     },
+  //   ]);
+  // }, []);
 
   const prevHandleClickRef = useRef(handleClick);
 
@@ -189,6 +189,7 @@ const ParentWithStateUpdates = () => {
 };
 
 const ChildCounter = React.memo(({ count, onIncrement }) => {
+  console.log(["CHILD RE_REDNE"]);
   return (
     <div className="child-container">
       <p className="count-text">Count: {count}</p>
