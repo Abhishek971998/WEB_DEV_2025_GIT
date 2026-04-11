@@ -1,8 +1,16 @@
 import TodoList from "./TodoList";
 import ScrollToTop from "./ScrollToTop";
+import CinemaHall from "./CinemaHall";
+import FormValidation from "./FormValidations";
 import React, { useState } from "react";
 export default function AllProjects(params) {
-  const arr = ["ScrollToTop", "TodoList", "GenerateCaptcha"];
+  const arr = [
+    "ScrollToTop",
+    "TodoList",
+    "GenerateCaptcha",
+    "CinemaHall",
+    "FormValidation",
+  ];
   const [type, setType] = useState("TodoList");
   const [randomValue, setrandomValue] = useState("");
 
@@ -24,6 +32,15 @@ export default function AllProjects(params) {
 
       case "GenerateCaptcha":
         return <GenerateCaptcha len={14} />;
+
+      case "GenerateCaptcha":
+        return <GenerateCaptcha len={14} />;
+
+      case "CinemaHall":
+        return <CinemaHall />;
+
+      case "FormValidation":
+        return <FormValidation />;
 
       default:
         return <TodoList />;

@@ -1,7 +1,11 @@
 .app-shell {
   min-height: 100vh;
   background:
-    radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 28%),
+    radial-gradient(
+      circle at top left,
+      rgba(56, 189, 248, 0.18),
+      transparent 28%
+    ),
     linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
 }
 
@@ -46,7 +50,9 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 180ms ease, visibility 180ms ease;
+  transition:
+    opacity 180ms ease,
+    visibility 180ms ease;
 }
 
 .drawer-backdrop--visible {
@@ -150,7 +156,11 @@
 .side-menu__link--active {
   color: #eff6ff;
   border-color: rgba(125, 211, 252, 0.7);
-  background: linear-gradient(135deg, rgba(14, 116, 144, 0.72), rgba(37, 99, 235, 0.8));
+  background: linear-gradient(
+    135deg,
+    rgba(14, 116, 144, 0.72),
+    rgba(37, 99, 235, 0.8)
+  );
   box-shadow: 0 16px 32px rgba(37, 99, 235, 0.28);
 }
 
@@ -193,4 +203,10 @@
     top: 78px;
     margin-bottom: 16px;
   }
+}
+
+input {
+  margin: 10px;
+  padding: 5px;
+  border: 1px solid;
 }
