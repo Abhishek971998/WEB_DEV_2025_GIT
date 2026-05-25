@@ -18,6 +18,21 @@ function ComponentComposite() {
   );
 }
 
+function Main() {
+  return (
+    <div>
+      <MainChild name={"abhisek"}>
+        <p>Hello</p>
+        <h1>This is inside Card</h1>
+      </MainChild>
+    </div>
+  );
+}
+
+function MainChild({ children }) {
+  return <div>{children}</div>;
+}
+
 //🔹 2. Custom Hooks Pattern
 
 function useFetch(url) {

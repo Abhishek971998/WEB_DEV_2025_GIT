@@ -36,6 +36,9 @@ import CSS from "./CSS";
 import ReactQuery from "./ReactQuery";
 import AllProjects from "./ReactProjects";
 import "./App.css";
+import YoutubeShorts from "./YoutubeShorts";
+import ListComponent from "./EventsCapNEventDel";
+import SeniorReactProjectGuide from "./ReactArchi";
 
 const routes = [
   { path: "/", element: <MostAskedTheory />, label: "Home" },
@@ -58,6 +61,7 @@ const routes = [
     element: <ReRenderProblem />,
     label: "Re-render Problem",
   },
+
   {
     path: "/re-render-solution",
     element: <ReRenderSolution />,
@@ -79,6 +83,12 @@ const routes = [
   { path: "/react", element: <CodeBlock />, label: "React" },
   { path: "/javascript", element: <CodeBlock />, label: "JavaScript" },
   {
+    path: "/ListComponent",
+    element: <ListComponent />,
+    label: "ListComponent",
+  },
+
+  {
     path: "/type-play",
     element: <TypeScriptExample />,
     label: "TypeScript Play",
@@ -93,6 +103,16 @@ const routes = [
   { path: "/ShortNotes", element: <ShortNotes />, label: "Short Notes" },
   { path: "/reactQuery", element: <ReactQuery />, label: "React Query" },
   { path: "/AllProjects", element: <AllProjects />, label: "React Projects" },
+  {
+    path: "/YoutubeShorts",
+    element: <YoutubeShorts />,
+    label: "YoutubeShorts",
+  },
+  {
+    path: "/SeniorReactProjectGuide",
+    element: <SeniorReactProjectGuide />,
+    label: "SeniorReactProjectGuide",
+  },
 ];
 
 function App() {
@@ -163,6 +183,7 @@ function App() {
 
           <main className="app-content">
             <Routes>
+              <Route path="*" element={<NotFound />} />
               {routes.map(({ path, element }) => (
                 <Route key={path} path={path} element={element} />
               ))}
@@ -172,6 +193,10 @@ function App() {
       </div>
     </Router>
   );
+}
+
+function NotFound() {
+  return <h2 style={{ background: "red" }}>Error 404</h2>;
 }
 
 export default App;

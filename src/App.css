@@ -210,3 +210,13 @@ input {
   padding: 5px;
   border: 1px solid;
 }
+
+.ml-2 {
+  margin-left: 2rem;
+}
+
+select {
+  padding: 16px;
+  border: 2px solid grey;
+  border-radius: 20px;
+}

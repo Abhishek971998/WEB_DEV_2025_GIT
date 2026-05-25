@@ -136,7 +136,7 @@ function StringInterviewProblem() {
             <div className="question-card">
               <h3>Q: How do you remove duplicates from an array?</h3>
               <p>
-                A: Use [...new Set(arr)] or arr.filter((v, i, a) => a.indexOf(v)
+                A: Use [...new Set(arr)] or arr.filter((v, i, a) = a.indexOf(v)
                 === i).
               </p>
             </div>

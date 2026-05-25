@@ -316,7 +316,7 @@ class Dog extends Animal {
 const city = person?.address?.city;
 
 // Nullish coalescing
-const username = user?.name ?? "Anonymous";
+const username = user?.name ?? "Anonymous"; //checks only for null or undefined
 
 // Logical assignment
 let config = {};
@@ -367,6 +367,47 @@ class Counter extends Component {
     );
   }
 }
+
+import React from "react";
+
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  // Triggered when an error occurs
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  // For logging errors
+  componentDidCatch(error, errorInfo) {
+    console.error("Error caught:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <h2>Something went wrong.</h2>;
+    }
+
+    return this.props.children;
+  }
+}
+
+export default ErrorBoundary;
+import ErrorBoundary from "./ErrorBoundary";
+import MyComponent from "./MyComponent";
+
+function App() {
+  return (
+    <ErrorBoundary>
+      <MyComponent />
+    </ErrorBoundary>
+  );
+}
+
+<>
 ```
 
 ### Hooks
@@ -434,7 +475,7 @@ function todoReducer(state, action) {
       ];
     case "TOGGLE_TODO":
       return state.map((todo) =>
-        todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
+        todo.id === action.id ? { ...todo, completed: !todo.completed } : todo,
       );
     default:
       return state;
@@ -1041,7 +1082,7 @@ function todoReducer(state = initialState, action) {
         todos: state.todos.map((todo) =>
           todo.id === action.payload.id
             ? { ...todo, completed: !todo.completed }
-            : todo
+            : todo,
         ),
       };
     default:

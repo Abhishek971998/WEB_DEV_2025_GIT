@@ -2,6 +2,8 @@ import TodoList from "./TodoList";
 import ScrollToTop from "./ScrollToTop";
 import CinemaHall from "./CinemaHall";
 import FormValidation from "./FormValidations";
+import FileExplorer from "./FileExplorer";
+import JsonToTree from "./NestedJsonViewer";
 import React, { useState } from "react";
 export default function AllProjects(params) {
   const arr = [
@@ -10,7 +12,10 @@ export default function AllProjects(params) {
     "GenerateCaptcha",
     "CinemaHall",
     "FormValidation",
+    "FileExplorer",
+    "JsonToTree",
   ];
+
   const [type, setType] = useState("TodoList");
   const [randomValue, setrandomValue] = useState("");
 
@@ -42,6 +47,12 @@ export default function AllProjects(params) {
       case "FormValidation":
         return <FormValidation />;
 
+      case "FileExplorer":
+        return <FileExplorer />;
+
+      case "JsonToTree":
+        return <JsonToTree />;
+
       default:
         return <TodoList />;
     }
@@ -55,21 +66,28 @@ export default function AllProjects(params) {
 
   return (
     <>
-      <div>
-        {arr.map((item) => (
-          <button
-            key={item}
-            onClick={() => setType(item)}
-            style={{ margin: "20px" }}
-          >
-            {item}
-          </button>
-        ))}
+      <div style={{ backgroundColor: "black", color: "white" }}>
+        <div>
+          {arr.map((item) => (
+            <button
+              key={item}
+              onClick={() => setType(item)}
+              style={{ margin: "20px" }}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div style={{ marginTop: "20px" }}>{showPage()}</div>
       <div>{randomValue}</div>
-      <button onClick={() => randomNum()}> GENERATE CAPTCHA</button>
+      <div>
+        <button onClick={() => randomNum()} style={{ marginTop: "20px" }}>
+          {" "}
+          GENERATE CAPTCHA
+        </button>
+      </div>
     </>
   );
 }

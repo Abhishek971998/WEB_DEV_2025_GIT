@@ -183,6 +183,8 @@ const asyncFunction = async () => {
     console.log("Async/Await Result:", result);
   } catch (error) {
     console.log("Error:", error);
+  } finally {
+    console.log(res, "ypp");
   }
 };
 
