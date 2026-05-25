@@ -17,7 +17,7 @@ function TopicList({ category }) {
     (topic) =>
       topic.category === category &&
       (topic.title.toLowerCase().includes(query.toLowerCase()) ||
-        topic.summary.toLowerCase().includes(query.toLowerCase()))
+        topic.summary.toLowerCase().includes(query.toLowerCase())),
   );
 
   return (
@@ -44,14 +44,14 @@ function App() {
 
         {nav.pathname == "/javascript" && <TopicList category="javascript" />}
 
-        {/* <Routes>
+        <Routes>
           <Route path="/" element={<Navigate to="/javascript" replace />} />
           <Route
             path="/javascript"
             element={<TopicList category="javascript" />}
           />
           <Route path="/react" element={<TopicList category="react" />} />
-        </Routes> */}
+        </Routes>
       </div>
     </div>
   );

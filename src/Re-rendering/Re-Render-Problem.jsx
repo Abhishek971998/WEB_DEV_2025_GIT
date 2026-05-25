@@ -223,7 +223,7 @@ const ContextExample = () => {
       ]);
     },
   };
-
+  //usecall ac
   const handleCountUpdate = () => {
     setCount((prev) => prev + 1);
     setLogs((prev) => [
@@ -255,6 +255,7 @@ const ContextExample = () => {
   );
 };
 
+//react.memo
 const ThemedComponent = () => {
   const { theme, toggleTheme } = React.useContext(ThemeContext);
 
@@ -268,6 +269,7 @@ const ThemedComponent = () => {
   );
 };
 
+//react.memo
 const CountDisplay = () => {
   return (
     <div className="count-container">
@@ -290,8 +292,10 @@ function calculateExpensiveValue(input) {
 const ExpensiveCalculationComponent = () => {
   const [count, setCount] = useState(0);
   const [logs, setLogs] = useState([]);
+
   const expensiveResult = calculateExpensiveValue(count);
 
+  //callback
   const handleCountUpdate = () => {
     setCount((prev) => prev + 1);
     setLogs((prev) => [
