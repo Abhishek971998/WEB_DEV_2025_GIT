@@ -77,6 +77,11 @@ const notes = [
   },
   {
     cat: "js",
+    text: "<code>Immutability meansdon't change the original thing; create a new one instead.",
+    isNew: true,
+  },
+  {
+    cat: "js",
     text: "The <strong>event loop</strong>: synchronous code runs first → microtasks (Promises, queueMicrotask) → macrotasks (setTimeout, setInterval)",
     isNew: true,
   },
@@ -243,6 +248,7 @@ const notes = [
     text: "<code>useContext</code> avoids prop drilling, but overusing it can make components harder to reuse and test",
     isNew: true,
   },
+
   {
     cat: "react",
     text: "<code>useReducer</code> is preferable to <code>useState</code> when next state depends on complex logic or multiple sub-values",
@@ -351,6 +357,11 @@ const notes = [
   {
     cat: "js",
     text: "<code> Arrow functions ignore call, apply, bind</code> ",
+    isNew: true,
+  },
+  {
+    cat: "js",
+    text: "<code> Always return promises inside .then() otherwise it will return undefined and catch will not work</code>  ",
     isNew: true,
   },
 ];
