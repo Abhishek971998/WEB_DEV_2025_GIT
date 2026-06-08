@@ -1,6 +1,22 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 
+// Explain React Fiber Architecture.
+// What happens internally when setState() is called?
+// Difference between Reconciliation and Virtual DOM.
+// Why does React use keys in lists?
+// Explain React rendering lifecycle in functional components.
+// How does React batching work?
+// How would you design a reusable component library?
+// How do you prevent unnecessary re-renders in a large React application?
+// Difference between controlled and uncontrolled components.
+// How would you implement authentication and route protection in React?
+// Explain Server-Side Rendering (SSR) vs Client-Side Rendering (CSR).
+// Difference between React Context, Redux, Zustand, and React Query.
+// How would you optimize a page with 10,000+ records?
+// What causes memory leaks in React and how do you prevent them?
+// Design a scalable frontend architecture for a large e-commerce application.
+
 const questions = {
   JavaScript: [
     {

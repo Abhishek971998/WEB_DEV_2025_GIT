@@ -39,6 +39,7 @@ import "./App.css";
 import YoutubeShorts from "./YoutubeShorts";
 import ListComponent from "./EventsCapNEventDel";
 import SeniorReactProjectGuide from "./ReactArchi";
+import FAANG from "./FAANG";
 
 const routes = [
   { path: "/", element: <MostAskedTheory />, label: "Home" },
@@ -113,6 +114,7 @@ const routes = [
     element: <SeniorReactProjectGuide />,
     label: "SeniorReactProjectGuide",
   },
+  { path: "/faang", element: <FAANG />, label: "Faang" },
 ];
 
 function App() {

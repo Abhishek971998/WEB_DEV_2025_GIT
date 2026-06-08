@@ -1,5 +1,8 @@
 // 🟢 Basic Promise
 
+// A Promise is an object that represents the eventual success or
+// failure of an asynchronous operation.
+
 // API Used:
 // https://dummyjson.com/test
 

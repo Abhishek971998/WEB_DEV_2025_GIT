@@ -70,6 +70,49 @@ function ArrayMethods() {
     return line;
   }
 
+// Common Immutable Patterns for Arrays
+
+  // Add an item
+const addItem = (newItem) => {
+  setItems(prev => [...prev, newItem]);
+};
+
+// Remove an item
+const removeItem = (id) => {
+  setItems(prev => prev.filter(item => item.id !== id));
+};
+
+// Update an item
+const updateItem = (id, changes) => {
+  setItems(prev =>
+    prev.map(item =>
+      item.id === id ? { ...item, ...changes } : item
+    )
+  );
+};
+
+// Common Immutable Patterns for Objects
+// Update a property
+const updateName = (newName) => {
+  setUser(prev => ({ ...prev, name: newName }));
+};
+
+// Remove a property
+const removeField = (field) => {
+  setUser(prev => {
+    const { [field]: _, ...rest } = prev;
+    return rest;
+  });
+};
+
+// Update nested property
+const updateCity = (city) => {
+  setUser(prev => ({
+    ...prev,
+    address: { ...prev.address, city }
+  }));
+};
+
   return (
     <div className="array-methods-cheatsheet">
       <h1 className="cheatsheet-title">JavaScript Array Methods Cheat Sheet</h1>

@@ -13,6 +13,21 @@ export default function HooksFAQ() {
   const intervalRef = useRef();
   const isMounted = useRef(true);
 
+  //   useEffect Lifecycle
+  // Render
+  // →
+  // DOM Update
+  // →
+  // Browser Paint
+  // →
+  // useEffect Runs
+  // If you need code to run before the browser paints (to prevent visual flicker), you need useLayoutEffect instead.
+
+  // The useEffect callback must return either nothing or a cleanup function.
+  // If you return a function, it will be called when the component unmounts.
+  // If you return nothing, the effect will run after every render.
+  // If you return a cleanup function, it will be called when the component unmounts.
+
   // 1. Why does useEffect run twice on initial render in development?
   useEffect(() => {
     console.log("useEffect - Runs twice in development due to StrictMode");
@@ -22,6 +37,23 @@ export default function HooksFAQ() {
   useEffect(() => {
     console.log("Effect with [count]");
   }, [count]);
+
+  // 3. How to prevent a race condition in useEffect?
+  useEffect(() => {
+    // let cancelled = false;
+
+    async function loadUser() {
+      const res = await fetch("/api/user");
+      const data = await res.json();
+      setText(data);
+    }
+
+    loadUser();
+
+    // return () => {
+    //   cancelled = true;
+    // };
+  }, []);
 
   // 3. Why might a component using React.memo still re-render?
   //   Because props are compared using shallow equality. If a prop is a new object or
@@ -142,6 +174,28 @@ export default function HooksFAQ() {
       setText(data);
     }
   };
+
+  //Important
+
+  // BAD: index as key causes bugs when list order changes
+  {
+    todos.map((todo, index) => <TodoItem key={index} todo={todo} />);
+  }
+
+  // Scenario: user deletes item at index 0
+  // Before: [A(key=0), B(key=1), C(key=2)]
+  // After:  [B(key=0), C(key=1)]
+  // React thinks key=0 changed from A to B (re-renders)
+  // instead of recognizing A was removed
+
+  // GOOD: stable unique ID as key
+  {
+    todos.map((todo) => <TodoItem key={todo.id} todo={todo} />);
+  }
+
+  // Now React correctly identifies:
+  // - key="a" was removed
+  // - key="b" and key="c" are unchanged (skip re-render)
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
